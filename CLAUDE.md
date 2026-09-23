@@ -23,8 +23,10 @@ próprios. Ver `docs/01-analise-referencia.md`.
 1. **Zero texto hardcoded em componente.** Todo conteúdo vem de `src/content/`.
    Se um componente precisa de uma string nova, adicione ao content file e passe por prop.
 2. **Zero cor/espaçamento solto.** Só tokens do `@theme`. Se faltar token, crie um.
-3. `"use client"` só onde há estado, evento ou hook. Dropzone, accordion e o
-   seletor de idioma são client; todo o resto é server.
+3. `"use client"` só onde há estado, evento ou hook — critério, não lista fechada.
+   Casos previstos: Dropzone, showcase do hero, Header (efeito de scroll) e
+   seletor de idioma. O accordion do FAQ usa `<details>`/`<summary>` e continua
+   server component. Todo o resto é server.
 4. Um componente por arquivo, nomeado igual ao arquivo, export default.
 5. Não copie textos, imagens ou logotipos do site de referência.
 6. `prefers-reduced-motion: reduce` desliga todos os marquees.
@@ -64,3 +66,9 @@ npm run typecheck
 ## Ordem de construção
 
 Siga `docs/03-plano-de-prompts.md`. Uma seção por vez, build passando antes da próxima.
+
+## Ambiente
+
+Desenvolvimento é no Windows com PowerShell. Use comandos compatíveis
+(`Copy-Item`, `Remove-Item`, `Move-Item`, `New-Item`, etc.) — nunca `cp`, `rm`,
+`mv`, `mkdir -p` ou outra sintaxe bash.
