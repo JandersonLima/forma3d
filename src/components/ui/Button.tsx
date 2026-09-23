@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -9,7 +9,7 @@ const base =
   "inline-flex items-center justify-center rounded-[var(--radius-pill)] font-medium transition-colors duration-150 disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-void hover:bg-[color-mix(in_srgb,var(--color-accent)_85%,white)]",
+  primary: "bg-accent text-void hover:bg-accent-strong",
   ghost: "border border-line text-ink hover:bg-surface-2",
 };
 
@@ -24,18 +24,9 @@ interface Props {
   variant?: Variant;
   size?: Size;
   className?: string;
-  onClick?: ComponentProps<"button">["onClick"];
-  type?: ComponentProps<"button">["type"];
 }
 
-export default function Button({
-  children,
-  href,
-  variant = "primary",
-  size = "md",
-  className,
-  ...rest
-}: Props) {
+export default function Button({ children, href, variant = "primary", size = "md", className }: Props) {
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
@@ -51,9 +42,5 @@ export default function Button({
     );
   }
 
-  return (
-    <button className={classes} {...rest}>
-      {children}
-    </button>
-  );
+  return <button className={classes}>{children}</button>;
 }

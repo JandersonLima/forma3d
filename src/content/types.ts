@@ -77,6 +77,14 @@ export interface FooterColumn {
   links: NavLink[];
 }
 
+export interface SandboxContent {
+  buttonLabels: { primary: string; ghost: string };
+  headings: {
+    center: { eyebrow: string; title: string; description: string };
+    left: { eyebrow: string; title: string; description: string };
+  };
+}
+
 export interface HomeContent {
   hero: {
     title: string;
