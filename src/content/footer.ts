@@ -67,11 +67,3 @@ export const socialLinks: NavLink[] = [
   { label: "Discord", href: "https://discord.gg/sua-conta", external: true },
   { label: "LinkedIn", href: "https://linkedin.com/company/sua-conta", external: true },
 ];
-
-export const mainNav: NavLink[] = [
-  { label: "Recursos", href: "/recursos" },
-  { label: "Soluções", href: "/solucoes" },
-  { label: "Galeria", href: "/galeria" },
-  { label: "Planos", href: "/planos" },
-  { label: "Blog", href: "/blog" },
-];

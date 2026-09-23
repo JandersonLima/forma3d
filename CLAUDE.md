@@ -77,3 +77,6 @@ Siga `docs/03-plano-de-prompts.md`. Uma seção por vez, build passando antes da
 Desenvolvimento é no Windows com PowerShell. Use comandos compatíveis
 (`Copy-Item`, `Remove-Item`, `Move-Item`, `New-Item`, etc.) — nunca `cp`, `rm`,
 `mv`, `mkdir -p` ou outra sintaxe bash.
+
+Nunca rodar `npm run dev` em background; a verificação no navegador é manual.
+O Claude roda apenas `typecheck`, `lint` e `build`.

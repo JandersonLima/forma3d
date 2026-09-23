@@ -13,10 +13,8 @@ export default function HomePage() {
   const { hero, partners } = home;
 
   return (
-    <main>
-      {/* TODO etapa 3: <AnnouncementBar /> e <Header /> */}
-
-      <section className="pt-28 pb-[var(--spacing-section)]">
+    <main id="conteudo">
+      <section className="py-[calc(var(--spacing-section)/2)]">
         <Container className="flex flex-col items-center gap-8 text-center">
           {/* TODO etapa 4: showcase de 6 cards antes/depois em marquee */}
           <h1 className="max-w-[18ch] text-[length:var(--text-display)]">{hero.title}</h1>
@@ -51,8 +49,7 @@ export default function HomePage() {
           <Gallery />
           <Faq />
           <FeatureGrid />
-          <FinalCta />
-          <Footer />                                                          */}
+          <FinalCta />                                                        */}
     </main>
   );
 }

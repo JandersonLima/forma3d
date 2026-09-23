@@ -24,23 +24,28 @@ interface Props {
   variant?: Variant;
   size?: Size;
   className?: string;
+  onClick?: () => void;
 }
 
-export default function Button({ children, href, variant = "primary", size = "md", className }: Props) {
+export default function Button({ children, href, variant = "primary", size = "md", className, onClick }: Props) {
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
     const external = href.startsWith("http");
     return external ? (
-      <a className={classes} href={href} rel="noopener noreferrer" target="_blank">
+      <a className={classes} href={href} rel="noopener noreferrer" target="_blank" onClick={onClick}>
         {children}
       </a>
     ) : (
-      <Link className={classes} href={href}>
+      <Link className={classes} href={href} onClick={onClick}>
         {children}
       </Link>
     );
   }
 
-  return <button className={classes}>{children}</button>;
+  return (
+    <button type="button" className={classes} onClick={onClick}>
+      {children}
+    </button>
+  );
 }

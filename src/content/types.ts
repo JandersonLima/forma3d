@@ -77,6 +77,39 @@ export interface FooterColumn {
   links: NavLink[];
 }
 
+export interface Brand {
+  name: string;
+  href: Href;
+}
+
+export interface Announcement {
+  text: string;
+  linkLabel: string;
+  href: Href;
+}
+
+export interface NavItem {
+  label: string;
+  href: Href;
+  /** Rótulo do link "ver tudo" dentro do painel — obrigatório sempre que `children` for definido. */
+  overviewLabel?: string;
+  children?: NavLink[];
+}
+
+export interface NavigationContent {
+  brand: Brand;
+  announcement: Announcement | null;
+  headerNav: NavItem[];
+  headerCta: { label: string; href: Href };
+  skipLinkLabel: string;
+  mobileMenuLabel: string;
+  mobileMenuCloseLabel: string;
+  /** Título/aria-label do painel da gaveta mobile quando aberta. */
+  mobileMenuTitle: string;
+  /** Texto do copyright sem o ano — o componente prefixa "© {ano atual} ". */
+  copyright: string;
+}
+
 export interface SandboxContent {
   buttonLabels: { primary: string; ghost: string };
   headings: {

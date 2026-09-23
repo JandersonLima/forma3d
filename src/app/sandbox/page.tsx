@@ -12,7 +12,7 @@ export default function SandboxPage() {
   const { buttonLabels, headings, marqueeTest } = sandbox;
 
   return (
-    <main>
+    <main id="conteudo">
       <section className="py-[calc(var(--spacing-section)/2)]">
         <Container className="flex flex-col gap-10">
           <SectionHeading
