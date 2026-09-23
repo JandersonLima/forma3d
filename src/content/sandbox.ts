@@ -17,4 +17,33 @@ export const sandbox: SandboxContent = {
       description: "Usado na maioria das seções de conteúdo da home.",
     },
   },
+  marqueeTest: {
+    eyebrow: "Marquee",
+    title: "Esteiras de teste",
+    description:
+      "Valida o loop sem vão com poucos itens e o comportamento com muitos itens e cards maiores.",
+    few: ["Alpha Studio", "Nimbus", "Vector Labs", "Órbita"],
+    many: [
+      "Alpha Studio",
+      "Nimbus",
+      "Vector Labs",
+      "Órbita",
+      "Prisma",
+      "Quanta",
+      "Estúdio Norte",
+      "Fractal",
+      "Lumen",
+      "Meridiano",
+      "Solaris",
+      "Vértice",
+    ],
+    cards: [
+      "Modelagem procedural",
+      "Retopologia automática",
+      "Texturas em 4K",
+      "Exportação para engines",
+      "Otimização de malha",
+      "Preview em tempo real",
+    ],
+  },
 };

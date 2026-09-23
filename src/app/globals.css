@@ -97,6 +97,8 @@
     display: flex;
     flex-shrink: 0;
     align-items: center;
+    justify-content: space-around;
+    min-width: 100%;
     gap: var(--marquee-gap, 2rem);
     padding-right: var(--marquee-gap, 2rem);
     animation: marquee-scroll var(--marquee-speed, 50s) linear infinite;
@@ -127,6 +129,9 @@
   }
   .marquee__track {
     animation: none;
+  }
+  .marquee__track[aria-hidden="true"] {
+    display: none;
   }
   html {
     scroll-behavior: auto;

@@ -83,6 +83,14 @@ export interface SandboxContent {
     center: { eyebrow: string; title: string; description: string };
     left: { eyebrow: string; title: string; description: string };
   };
+  marqueeTest: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    few: string[];
+    many: string[];
+    cards: string[];
+  };
 }
 
 export interface HomeContent {

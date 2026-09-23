@@ -1,6 +1,7 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import SectionHeading from "@/components/ui/SectionHeading";
+import Marquee from "@/components/ui/Marquee";
 import { sandbox } from "@/content/sandbox";
 
 /**
@@ -8,11 +9,11 @@ import { sandbox } from "@/content/sandbox";
  * seções da home (docs/03-plano-de-prompts.md) estiverem todas prontas.
  */
 export default function SandboxPage() {
-  const { buttonLabels, headings } = sandbox;
+  const { buttonLabels, headings, marqueeTest } = sandbox;
 
   return (
     <main>
-      <section className="py-[var(--spacing-section)]">
+      <section className="py-[calc(var(--spacing-section)/2)]">
         <Container className="flex flex-col gap-10">
           <SectionHeading
             align="center"
@@ -37,7 +38,7 @@ export default function SandboxPage() {
         </Container>
       </section>
 
-      <section className="py-[var(--spacing-section)]">
+      <section className="py-[calc(var(--spacing-section)/2)]">
         <Container>
           <SectionHeading
             align="left"
@@ -45,6 +46,43 @@ export default function SandboxPage() {
             title={headings.left.title}
             description={headings.left.description}
           />
+        </Container>
+      </section>
+
+      <section className="py-[calc(var(--spacing-section)/2)]">
+        <Container className="flex flex-col gap-10">
+          <SectionHeading
+            align="left"
+            eyebrow={marqueeTest.eyebrow}
+            title={marqueeTest.title}
+            description={marqueeTest.description}
+          />
+          <div className="flex flex-col gap-8">
+            <Marquee direction="left" speed={45}>
+              {marqueeTest.few.map((label) => (
+                <span key={label} className="text-sm text-ink-muted">
+                  {label}
+                </span>
+              ))}
+            </Marquee>
+            <Marquee direction="right" speed={30}>
+              {marqueeTest.many.map((label) => (
+                <span key={label} className="text-sm text-ink-muted">
+                  {label}
+                </span>
+              ))}
+            </Marquee>
+            <Marquee direction="left" speed={60}>
+              {marqueeTest.cards.map((label) => (
+                <div
+                  key={label}
+                  className="rounded-[var(--radius-card)] border border-line bg-surface-2 px-6 py-5 text-body text-ink"
+                >
+                  {label}
+                </div>
+              ))}
+            </Marquee>
+          </div>
         </Container>
       </section>
     </main>

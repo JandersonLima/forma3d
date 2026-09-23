@@ -31,6 +31,11 @@ próprios. Ver `docs/01-analise-referencia.md`.
 5. Não copie textos, imagens ou logotipos do site de referência.
 6. `prefers-reduced-motion: reduce` desliga todos os marquees.
 7. Nada de `any`. Tipos ficam em `src/content/types.ts`.
+8. Espaçamento vertical entre seções: cada `<section>` usa
+   `py-[calc(var(--spacing-section)/2)]` (metade em cima, metade embaixo),
+   nunca `py-[var(--spacing-section)]` inteiro — assim duas seções
+   adjacentes somam exatamente um `--spacing-section` no encontro, em vez de
+   dois tokens inteiros.
 
 ## Estrutura
 
