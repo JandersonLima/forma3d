@@ -13,6 +13,18 @@ export interface ShowcaseItem {
   alt: string;
 }
 
+export type ImageFileError = "type" | "size";
+
+export interface DropzoneContent {
+  label: string;
+  hint: string;
+  previewAlt: string;
+  replaceLabel: string;
+  /** Texto do CTA quando há uma imagem na pré-visualização. */
+  ctaWithImageLabel: string;
+  errors: Record<ImageFileError, string>;
+}
+
 export interface Logo {
   name: string;
   src: string;
@@ -130,8 +142,7 @@ export interface HomeContent {
   hero: {
     title: string;
     subtitle: string;
-    dropzoneLabel: string;
-    dropzoneHint: string;
+    dropzone: DropzoneContent;
     ctaLabel: string;
     ctaHref: Href;
   };

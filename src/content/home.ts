@@ -12,8 +12,17 @@ export const home: HomeContent = {
     title: "Seu render vira modelo 3D antes do café esfriar",
     subtitle:
       "Envie uma foto, um esboço ou uma descrição. Você recebe uma malha texturizada, pronta para abrir no Blender, no Unity ou na impressora.",
-    dropzoneLabel: "Solte uma imagem para começar",
-    dropzoneHint: "Clique, arraste ou cole com Ctrl+V — PNG, JPG ou WebP até 10 MB",
+    dropzone: {
+      label: "Solte uma imagem para começar",
+      hint: "Clique, arraste ou cole com Ctrl+V — PNG, JPG ou WebP até 10 MB",
+      previewAlt: "Pré-visualização da imagem enviada",
+      replaceLabel: "Trocar imagem",
+      ctaWithImageLabel: "Gerar modelo desta imagem",
+      errors: {
+        type: "Formato não aceito. Use PNG, JPG ou WebP.",
+        size: "Arquivo acima de 10 MB. Reduza a imagem e tente de novo.",
+      },
+    },
     ctaLabel: "Gerar meu primeiro modelo",
     ctaHref: APP,
   },
