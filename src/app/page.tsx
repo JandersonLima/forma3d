@@ -1,3 +1,4 @@
+import GenerationModes from "@/components/sections/GenerationModes";
 import Hero from "@/components/sections/Hero";
 
 /**
@@ -8,9 +9,9 @@ export default function HomePage() {
   return (
     <main id="conteudo">
       <Hero />
+      <GenerationModes />
 
       {/* TODO, nesta ordem:
-          <GenerationModes />
           <PrintingSection />
           <GameAssets />
           <Industries />

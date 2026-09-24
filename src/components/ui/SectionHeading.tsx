@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 
 interface Props {
+  /** Vai no h2 — use sectionTitleId(id da Section) para ligar o aria-labelledby. */
+  id?: string;
   eyebrow?: string;
   title: string;
   description?: string;
@@ -9,6 +11,7 @@ interface Props {
 }
 
 export default function SectionHeading({
+  id,
   eyebrow,
   title,
   description,
@@ -20,7 +23,7 @@ export default function SectionHeading({
       {eyebrow ? (
         <p className="text-[length:var(--text-sm)] text-accent">{eyebrow}</p>
       ) : null}
-      <h2 className="text-[length:var(--text-h2)]">{title}</h2>
+      <h2 id={id} className="text-[length:var(--text-h2)]">{title}</h2>
       {description ? (
         <p className="max-w-[60ch] text-[length:var(--text-body-lg)] text-ink-muted">
           {description}

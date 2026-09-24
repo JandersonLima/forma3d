@@ -3,8 +3,10 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Dropzone from "@/components/ui/Dropzone";
 import Marquee from "@/components/ui/Marquee";
+import Section from "@/components/ui/Section";
 import ShowcaseCard from "@/components/sections/ShowcaseCard";
 import { home } from "@/content/home";
+import { sectionTitleId } from "@/lib/utils";
 
 /** Passo da entrada orquestrada (globals.css, .hero-enter). */
 const enterStep = (step: number) => ({ "--enter-step": step }) as CSSProperties;
@@ -13,7 +15,7 @@ export default function Hero() {
   const { hero, showcase, partners } = home;
 
   return (
-    <section className="flex flex-col gap-12 py-[calc(var(--spacing-section)/2)]">
+    <Section id="hero" className="flex flex-col gap-12">
       <Marquee speed={60} gap="1.5rem">
         {showcase.map((item, i) => (
           <ShowcaseCard key={item.label} item={item} index={i} priority={i < 2} />
@@ -21,7 +23,7 @@ export default function Hero() {
       </Marquee>
 
       <Container className="flex flex-col items-center gap-8 text-center">
-        <h1 className="hero-enter max-w-[18ch] text-[length:var(--text-display)]" style={enterStep(0)}>
+        <h1 id={sectionTitleId("hero")} className="hero-enter max-w-[18ch] text-[length:var(--text-display)]" style={enterStep(0)}>
           {hero.title}
         </h1>
         <p
@@ -48,6 +50,6 @@ export default function Hero() {
           />
         ))}
       </Marquee>
-    </section>
+    </Section>
   );
 }

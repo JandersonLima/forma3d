@@ -22,3 +22,6 @@ export function chunkInto<T>(items: T[], parts: number): T[][] {
   const size = Math.ceil(items.length / parts);
   return Array.from({ length: parts }, (_, i) => items.slice(i * size, (i + 1) * size));
 }
+
+/** Id do título de uma seção — Section aponta aria-labelledby para ele. */
+export const sectionTitleId = (id: string) => `${id}-title`;

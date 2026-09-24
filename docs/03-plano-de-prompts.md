@@ -18,7 +18,13 @@ Depois copie para dentro do projeto recém-criado: `CLAUDE.md`, a pasta `docs/`,
 
 ---
 
-## Etapa 1 — design system
+## Etapa 1 — primeira sessão
+
+> Leia o `CLAUDE.md` e todos os arquivos de `docs/` antes de escrever qualquer código.
+
+---
+
+## Etapa 2 — design system
 
 > Leia `docs/02-design-system.md` e `src/app/globals.css`. Confirme que todos os tokens
 > do documento existem no bloco `@theme`. Depois crie `src/components/ui/Container.tsx`,
@@ -28,7 +34,7 @@ Depois copie para dentro do projeto recém-criado: `CLAUDE.md`, a pasta `docs/`,
 
 ---
 
-## Etapa 2 — o Marquee (faça antes de qualquer seção)
+## Etapa 3 — o Marquee (faça antes de qualquer seção)
 
 > Crie `src/components/ui/Marquee.tsx`. Props: `children`, `direction` ('left' | 'right'),
 > `speed` em segundos, `pauseOnHover` (default true), `gap`. Duplique o conteúdo 2x no DOM
@@ -39,7 +45,7 @@ Depois copie para dentro do projeto recém-criado: `CLAUDE.md`, a pasta `docs/`,
 
 ---
 
-## Etapa 3 — Header, AnnouncementBar e Footer
+## Etapa 4 — Header, AnnouncementBar e Footer
 
 > Implemente `src/components/layout/`. O Header é sticky, fundo transparente no topo e
 > `--color-surface` com borda inferior após 24px de scroll (client component só para isso).
@@ -49,7 +55,7 @@ Depois copie para dentro do projeto recém-criado: `CLAUDE.md`, a pasta `docs/`,
 
 ---
 
-## Etapa 4 — Hero completo
+## Etapa 5 — Hero completo
 
 > Construa `src/components/sections/Hero.tsx` com: (a) showcase de 6 cards em marquee,
 > cada card com duas imagens sobrepostas e troca no hover; (b) H1 e subtítulo vindos de
@@ -60,7 +66,7 @@ Depois copie para dentro do projeto recém-criado: `CLAUDE.md`, a pasta `docs/`,
 
 ---
 
-## Etapa 5 — seções de conteúdo
+## Etapa 6 — seções de conteúdo
 
 Uma mensagem por seção, nesta ordem:
 
@@ -89,15 +95,11 @@ Uma mensagem por seção, nesta ordem:
 
 ---
 
-## Etapa 6 — montagem e SEO
+## Etapa 7 — montagem, SEO e i18n
 
 > Monte `src/app/page.tsx` na ordem de `docs/01-analise-referencia.md` seção 2.
 > Preencha o `metadata` do `layout.tsx` com title, description, OpenGraph, Twitter,
 > canonical e alternates. Adicione `app/sitemap.ts` e `app/robots.ts`.
-
----
-
-## Etapa 7 — i18n
 
 > Configure `next-intl` com locales `pt-BR` (default, sem prefixo) e `en` (`/en`).
 > Mova `src/content/home.ts` para `src/content/home.pt.ts` e `home.en.ts` mantendo os

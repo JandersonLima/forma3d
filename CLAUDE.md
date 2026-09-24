@@ -36,6 +36,10 @@ próprios. Ver `docs/01-analise-referencia.md`.
    nunca `py-[var(--spacing-section)]` inteiro — assim duas seções
    adjacentes somam exatamente um `--spacing-section` no encontro, em vez de
    dois tokens inteiros.
+9. Toda seção da home usa `<Section id="…">` (`src/components/ui/Section.tsx`),
+   nunca `<section>` cru. Ela aplica a regra 8 e `aria-labelledby` apontando
+   para `sectionTitleId(id)` (`${id}-title`, em `src/lib/utils.ts`), que deve
+   ir no título da seção (h1 do Hero, `SectionHeading id` nas demais).
 
 ## Estrutura
 
@@ -45,7 +49,7 @@ src/
   components/
     layout/     Header, Footer, AnnouncementBar
     sections/   uma seção da home por arquivo, na ordem da página
-    ui/         Button, Marquee, Container, SectionHeading, Accordion, Dropzone
+    ui/         Button, Marquee, Container, Section, SectionHeading, Accordion, Dropzone
   content/      home.ts (dados), footer.ts, types.ts
   lib/          utils.ts
   hooks/        usePasteImage.ts
