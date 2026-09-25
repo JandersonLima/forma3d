@@ -91,6 +91,7 @@ export const home: HomeContent = {
     alt: "Impressora 3D produzindo um modelo gerado na plataforma",
     ctaLabel: "Preparar para impressão",
     ctaHref: APP,
+    compatibleLabel: "Compatível com",
     compatible: [
       { name: "Fatiador 1", src: "/images/logos/slicer-1.svg" },
       { name: "Fatiador 2", src: "/images/logos/slicer-2.svg" },

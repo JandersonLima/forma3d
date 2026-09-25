@@ -1,5 +1,6 @@
 import GenerationModes from "@/components/sections/GenerationModes";
 import Hero from "@/components/sections/Hero";
+import PrintingSection from "@/components/sections/PrintingSection";
 
 /**
  * Cada bloco marcado com TODO vira um componente em src/components/sections/ —
@@ -10,9 +11,9 @@ export default function HomePage() {
     <main id="conteudo">
       <Hero />
       <GenerationModes />
+      <PrintingSection />
 
       {/* TODO, nesta ordem:
-          <PrintingSection />
           <GameAssets />
           <Industries />
           <SocialProof />

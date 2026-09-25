@@ -159,6 +159,7 @@ export interface HomeContent {
     alt: string;
     ctaLabel: string;
     ctaHref: Href;
+    compatibleLabel: string;
     compatible: Logo[];
   };
   games: {

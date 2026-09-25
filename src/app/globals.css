@@ -132,6 +132,32 @@
     }
   }
 
+  /* ---- etapas numeradas (PrintingSection): número vem do counter, não do JSX ---- */
+  .steps {
+    counter-reset: step;
+  }
+
+  .steps > li {
+    counter-increment: step;
+  }
+
+  .steps > li::before {
+    content: counter(step);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent-soft);
+    /* ink, não accent: accent sobre accent-soft fica abaixo do AA */
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
   /* ---- entrada orquestrada: a única da página ---- */
   .hero-enter {
     animation: hero-enter 500ms ease-out both;
