@@ -107,6 +107,7 @@ export const home: HomeContent = {
       { image: "/images/games/rigging.webp", alt: "Personagem 3D com esqueleto aplicado", title: "Esqueleto automático", body: "Humanoides e criaturas saem com rig pronto, com articulações no lugar certo para animar.", href: "/recursos/rigging" },
       { image: "/images/games/texturing.webp", alt: "Modelo 3D com conjunto de texturas PBR aplicado", title: "Textura PBR completa", body: "Albedo, normal, metallic e roughness em até 8K — ou base color limpa, se o seu estilo for pintado à mão.", href: "/recursos/textura" },
     ],
+    enginesLabel: "Funciona com",
     engines: [
       { name: "Engine 1", src: "/images/logos/engine-1.svg" },
       { name: "Engine 2", src: "/images/logos/engine-2.svg" },

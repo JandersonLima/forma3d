@@ -166,6 +166,7 @@ export interface HomeContent {
     title: string;
     subtitle: string;
     features: GameFeature[];
+    enginesLabel: string;
     engines: Logo[];
     ctaLabel: string;
     ctaHref: Href;
