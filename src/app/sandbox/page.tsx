@@ -1,8 +1,16 @@
+import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Marquee from "@/components/ui/Marquee";
 import { sandbox } from "@/content/sandbox";
+import { seo } from "@/content/seo";
+
+/** Fora do sitemap, bloqueada no robots.txt e noindex aqui. */
+export const metadata: Metadata = {
+  title: seo.sandbox.title,
+  robots: { index: false, follow: false },
+};
 
 /**
  * Página temporária para validar o design system. Removida quando as

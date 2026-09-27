@@ -1,32 +1,36 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import JsonLd from "@/components/ui/JsonLd";
 import { navigation } from "@/content/navigation";
+import { seo } from "@/content/seo";
+import { absoluteUrl, siteUrl } from "@/lib/site";
+import { theme } from "@/lib/theme";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const display = Space_Grotesk({ subsets: ["latin"], variable: "--font-grotesk", display: "swap" });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://exemplo.com.br";
-
+/** Título e descrição de cada página ficam no page.tsx; aqui só o que é comum a todas. */
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Gerador de modelos 3D com IA | Imagem e texto para 3D em segundos",
-  description:
-    "Transforme fotos, esboços ou descrições em modelos 3D texturizados e prontos para jogos, impressão 3D e animação. Sem instalar nada.",
-  alternates: { canonical: "/", languages: { "pt-BR": "/", en: "/en" } },
-  openGraph: {
-    type: "website",
-    locale: "pt_BR",
-    url: siteUrl,
-    siteName: "Forma3D",
-    title: "Gerador de modelos 3D com IA",
-    description: "De uma imagem a um modelo 3D pronto para uso, em segundos.",
-    images: [{ url: "/images/og.webp", width: 1200, height: 630 }],
-  },
+  title: { template: seo.titleTemplate, default: seo.defaultTitle },
+  description: seo.defaultDescription,
+  applicationName: seo.siteName,
+  openGraph: { type: "website", locale: seo.ogLocale, siteName: seo.siteName },
   twitter: { card: "summary_large_image" },
+};
+
+export const viewport: Viewport = { themeColor: theme.void };
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: seo.siteName,
+  url: siteUrl,
+  logo: absoluteUrl("/icon.svg"),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -43,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+        <JsonLd data={organizationJsonLd} />
       </body>
     </html>
   );

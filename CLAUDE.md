@@ -84,3 +84,7 @@ Desenvolvimento é no Windows com PowerShell. Use comandos compatíveis
 
 Nunca rodar `npm run dev` em background; a verificação no navegador é manual.
 O Claude roda apenas `typecheck`, `lint` e `build`.
+
+Python não está instalado; edite arquivos com as ferramentas de edição, não com scripts Python.
+
+Nunca encadeie `npm run build` com `| Select-String` ou outro filtro no PowerShell; rode o build puro.

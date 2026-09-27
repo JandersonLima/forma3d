@@ -184,3 +184,22 @@ export interface HomeContent {
   features: { title: string; items: Feature[] };
   finalCta: { title: string; body: string; ctaLabel: string; ctaHref: Href };
 }
+
+export interface PageSeo {
+  title: string;
+  description: string;
+}
+
+export interface SeoContent {
+  siteName: string;
+  /** Template do <title>; `%s` recebe o título de cada página. */
+  titleTemplate: string;
+  defaultTitle: string;
+  defaultDescription: string;
+  /** Locale do OpenGraph (formato `ll_CC`). */
+  ogLocale: string;
+  home: PageSeo;
+  sandbox: Pick<PageSeo, "title">;
+  /** Campos do JSON-LD SoftwareApplication da home. */
+  app: { category: string; operatingSystem: string };
+}

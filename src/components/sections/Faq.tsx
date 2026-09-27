@@ -1,4 +1,5 @@
 import Container from "@/components/ui/Container";
+import JsonLd from "@/components/ui/JsonLd";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FaqItem from "@/components/sections/FaqItem";
@@ -31,10 +32,7 @@ export default function Faq() {
           ))}
         </div>
       </Container>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
-      />
+      <JsonLd data={faqJsonLd} />
     </Section>
   );
 }
