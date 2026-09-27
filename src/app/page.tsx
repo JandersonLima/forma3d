@@ -1,3 +1,4 @@
+import Gallery from "@/components/sections/Gallery";
 import GameAssets from "@/components/sections/GameAssets";
 import GenerationModes from "@/components/sections/GenerationModes";
 import Hero from "@/components/sections/Hero";
@@ -18,9 +19,9 @@ export default function HomePage() {
       <GameAssets />
       <Industries />
       <SocialProof />
+      <Gallery />
 
       {/* TODO, nesta ordem:
-          <Gallery />
           <Faq />
           <FeatureGrid />
           <FinalCta />                                                        */}

@@ -182,7 +182,7 @@ export interface HomeContent {
     resumeLabel: string;
     testimonials: Testimonial[];
   };
-  gallery: { title: string; models: GalleryModel[] };
+  gallery: { title: string; pauseLabel: string; resumeLabel: string; models: GalleryModel[] };
   faq: { title: string; items: FaqItem[] };
   features: { title: string; items: Feature[] };
   finalCta: { title: string; body: string; ctaLabel: string; ctaHref: Href };

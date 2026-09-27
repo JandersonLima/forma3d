@@ -156,7 +156,9 @@ export const home: HomeContent = {
 
   gallery: {
     title: "Feito na plataforma",
-    // 12 itens aqui; o componente distribui em 3 esteiras de 4.
+    pauseLabel: "Pausar galeria",
+    resumeLabel: "Retomar galeria",
+    // 12 itens; cada uma das 3 esteiras mostra todos, em ordem rotacionada.
     models: Array.from({ length: 12 }, (_, i) => ({
       thumb: `/images/gallery/model-${String(i + 1).padStart(2, "0")}.webp`,
       name: `Modelo ${i + 1}`,

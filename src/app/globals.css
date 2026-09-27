@@ -42,6 +42,8 @@
   --container-card: 27rem;
   /* largura fixa do card de depoimento nas esteiras */
   --container-quote: 22rem;
+  /* largura fixa do card de modelo nas esteiras da galeria */
+  --container-thumb: 14rem;
 
   /* breakpoints */
   --breakpoint-sm: 640px;
@@ -117,9 +119,36 @@
     animation-play-state: paused;
   }
 
+  /* item focado não sai da tela enquanto o teclado está nele */
+  .marquee:focus-within .marquee__track {
+    animation-play-state: paused;
+  }
+
   /* MarqueePauseToggle: pausa todas as esteiras que envolve (WCAG 2.2.2) */
   [data-marquee-paused="true"] .marquee__track {
     animation-play-state: paused;
+  }
+
+  /* ---- galeria: nome sobre a miniatura. Só opacity — o nome é o texto do link ---- */
+  .gallery-card__name {
+    opacity: 0;
+    transition: opacity 150ms ease-out;
+  }
+
+  .gallery-card:focus-visible .gallery-card__name {
+    opacity: 1;
+  }
+
+  @media (hover: hover) {
+    .gallery-card:hover .gallery-card__name {
+      opacity: 1;
+    }
+  }
+
+  @media (hover: none) {
+    .gallery-card__name {
+      opacity: 1;
+    }
   }
 
   /* ---- showcase do hero: antes/depois sem JS ---- */

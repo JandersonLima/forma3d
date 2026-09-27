@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, isExternalHref } from "@/lib/utils";
 
 type Variant = "primary" | "ghost";
 type Size = "md" | "lg";
@@ -31,8 +31,7 @@ export default function Button({ children, href, variant = "primary", size = "md
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
-    const external = href.startsWith("http");
-    return external ? (
+    return isExternalHref(href) ? (
       <a className={classes} href={href} rel="noopener noreferrer" target="_blank" onClick={onClick}>
         {children}
       </a>
