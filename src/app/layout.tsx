@@ -3,7 +3,6 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { home } from "@/content/home";
 import { navigation } from "@/content/navigation";
 import "./globals.css";
 
@@ -30,16 +29,6 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: home.faq.items.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: { "@type": "Answer", text: item.answer },
-  })),
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${inter.variable} ${display.variable}`}>
@@ -54,10 +43,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
       </body>
     </html>
   );

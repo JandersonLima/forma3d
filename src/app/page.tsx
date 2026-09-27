@@ -1,3 +1,4 @@
+import Faq from "@/components/sections/Faq";
 import Gallery from "@/components/sections/Gallery";
 import GameAssets from "@/components/sections/GameAssets";
 import GenerationModes from "@/components/sections/GenerationModes";
@@ -20,9 +21,9 @@ export default function HomePage() {
       <Industries />
       <SocialProof />
       <Gallery />
+      <Faq />
 
       {/* TODO, nesta ordem:
-          <Faq />
           <FeatureGrid />
           <FinalCta />                                                        */}
     </main>

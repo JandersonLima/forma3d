@@ -89,7 +89,7 @@ Uma mensagem por seção, nesta ordem:
 > nome no hover e link.
 
 > Implemente `Faq.tsx` — accordion acessível a partir de `content.faq`, e exporte o
-> mesmo array como JSON-LD `FAQPage` no `layout.tsx`.
+> mesmo array como JSON-LD `FAQPage` dentro da própria seção Faq (não no `layout.tsx`).
 
 > Implemente `FeatureGrid.tsx` (6 cards) e `FinalCta.tsx`.
 
