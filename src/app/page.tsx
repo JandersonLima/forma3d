@@ -3,6 +3,7 @@ import GenerationModes from "@/components/sections/GenerationModes";
 import Hero from "@/components/sections/Hero";
 import Industries from "@/components/sections/Industries";
 import PrintingSection from "@/components/sections/PrintingSection";
+import SocialProof from "@/components/sections/SocialProof";
 
 /**
  * Cada bloco marcado com TODO vira um componente em src/components/sections/ —
@@ -16,9 +17,9 @@ export default function HomePage() {
       <PrintingSection />
       <GameAssets />
       <Industries />
+      <SocialProof />
 
       {/* TODO, nesta ordem:
-          <SocialProof />
           <Gallery />
           <Faq />
           <FeatureGrid />

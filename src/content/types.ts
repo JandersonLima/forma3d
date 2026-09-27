@@ -172,7 +172,16 @@ export interface HomeContent {
     ctaHref: Href;
   };
   industries: { title: string; subtitle: string; prevLabel: string; nextLabel: string; items: Industry[] };
-  social: { title: string; reviewLabel: string; reviewHref: Href; testimonials: Testimonial[] };
+  social: {
+    title: string;
+    reviewLabel: string;
+    reviewHref: Href;
+    /** Só para leitor de tela: avisa que o link de avaliações abre em nova aba. */
+    externalHint: string;
+    pauseLabel: string;
+    resumeLabel: string;
+    testimonials: Testimonial[];
+  };
   gallery: { title: string; models: GalleryModel[] };
   faq: { title: string; items: FaqItem[] };
   features: { title: string; items: Feature[] };

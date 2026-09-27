@@ -40,6 +40,8 @@
   --container-page: 1200px;
   /* teto do card de carrossel: ~2,5 cards no conteúdo de 1200px */
   --container-card: 27rem;
+  /* largura fixa do card de depoimento nas esteiras */
+  --container-quote: 22rem;
 
   /* breakpoints */
   --breakpoint-sm: 640px;
@@ -112,6 +114,11 @@
   }
 
   .marquee[data-pause="true"]:hover .marquee__track {
+    animation-play-state: paused;
+  }
+
+  /* MarqueePauseToggle: pausa todas as esteiras que envolve (WCAG 2.2.2) */
+  [data-marquee-paused="true"] .marquee__track {
     animation-play-state: paused;
   }
 
@@ -234,6 +241,15 @@
     animation: none;
   }
   .marquee__track[aria-hidden="true"] {
+    display: none;
+  }
+  /* as esteiras já estão paradas: não há o que pausar */
+  .marquee-pause-toggle {
+    display: none;
+  }
+  /* esteiras só decorativas (aria-hidden) virariam scrollers focáveis
+     escondidos do leitor de tela — some com elas e fica a legível */
+  .marquee-decorative {
     display: none;
   }
   .showcase-card__after {

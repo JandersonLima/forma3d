@@ -23,5 +23,10 @@ export function chunkInto<T>(items: T[], parts: number): T[][] {
   return Array.from({ length: parts }, (_, i) => items.slice(i * size, (i + 1) * size));
 }
 
+/** Mesma lista começando no índice `start` — desalinha esteiras que usam os mesmos itens. */
+export function rotate<T>(items: T[], start: number): T[] {
+  return [...items.slice(start), ...items.slice(0, start)];
+}
+
 /** Id do título de uma seção — Section aponta aria-labelledby para ele. */
 export const sectionTitleId = (id: string) => `${id}-title`;

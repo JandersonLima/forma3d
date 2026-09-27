@@ -137,6 +137,9 @@ export const home: HomeContent = {
     title: "Mais de X mil criadores, Y milhões de modelos gerados",
     reviewLabel: "Ver avaliações",
     reviewHref: "https://exemplo.com/avaliacoes",
+    externalHint: "(abre em nova aba)",
+    pauseLabel: "Pausar depoimentos",
+    resumeLabel: "Retomar depoimentos",
     // Placeholders. Substitua por depoimentos reais com autorização de uso.
     testimonials: [
       { avatar: "/images/avatars/01.webp", name: "Nome Sobrenome", role: "Artista 3D", quote: "Coloque aqui um depoimento real, curto, com um detalhe concreto do fluxo de trabalho." },
