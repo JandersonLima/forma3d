@@ -1,4 +1,6 @@
 import Faq from "@/components/sections/Faq";
+import FeatureGrid from "@/components/sections/FeatureGrid";
+import FinalCta from "@/components/sections/FinalCta";
 import Gallery from "@/components/sections/Gallery";
 import GameAssets from "@/components/sections/GameAssets";
 import GenerationModes from "@/components/sections/GenerationModes";
@@ -7,10 +9,7 @@ import Industries from "@/components/sections/Industries";
 import PrintingSection from "@/components/sections/PrintingSection";
 import SocialProof from "@/components/sections/SocialProof";
 
-/**
- * Cada bloco marcado com TODO vira um componente em src/components/sections/ —
- * siga docs/03-plano-de-prompts.md. A ordem abaixo é a ordem final da página.
- */
+/** A ordem abaixo é a ordem final da página. */
 export default function HomePage() {
   return (
     <main id="conteudo">
@@ -22,10 +21,8 @@ export default function HomePage() {
       <SocialProof />
       <Gallery />
       <Faq />
-
-      {/* TODO, nesta ordem:
-          <FeatureGrid />
-          <FinalCta />                                                        */}
+      <FeatureGrid />
+      <FinalCta />
     </main>
   );
 }

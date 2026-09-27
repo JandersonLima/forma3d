@@ -50,13 +50,16 @@ export interface GameFeature {
   href: Href;
 }
 
-export interface Industry {
+/** Card com imagem, título e texto, clicável por inteiro (LinkCard). */
+export interface LinkCardItem {
   image: string;
   alt: string;
   title: string;
   body: string;
   href: Href;
 }
+
+export type Industry = LinkCardItem;
 
 export interface Testimonial {
   avatar: string;
@@ -76,13 +79,7 @@ export interface FaqItem {
   answer: string;
 }
 
-export interface Feature {
-  image: string;
-  alt: string;
-  title: string;
-  body: string;
-  href: Href;
-}
+export type Feature = LinkCardItem;
 
 export interface FooterColumn {
   title: string;
