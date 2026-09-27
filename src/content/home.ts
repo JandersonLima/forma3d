@@ -123,6 +123,8 @@ export const home: HomeContent = {
   industries: {
     title: "Quem já trabalha assim",
     subtitle: "O mesmo fluxo atende times bem diferentes. Veja o mais parecido com o seu.",
+    prevLabel: "Setor anterior",
+    nextLabel: "Próximo setor",
     items: [
       { image: "/images/industries/media.webp", alt: "Personagem 3D em duas versões: texturizada e em argila", title: "Animação e cinema", body: "Concept art vira personagem com rig, pronto para o primeiro teste de movimento.", href: "/solucoes/animacao" },
       { image: "/images/industries/ecommerce.webp", alt: "Cadeira de escritório em variações de cor para loja online", title: "E-commerce", body: "Uma foto do produto vira modelo texturizado para girar 360° na página.", href: "/solucoes/ecommerce" },

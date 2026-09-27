@@ -1,6 +1,7 @@
 import GameAssets from "@/components/sections/GameAssets";
 import GenerationModes from "@/components/sections/GenerationModes";
 import Hero from "@/components/sections/Hero";
+import Industries from "@/components/sections/Industries";
 import PrintingSection from "@/components/sections/PrintingSection";
 
 /**
@@ -14,9 +15,9 @@ export default function HomePage() {
       <GenerationModes />
       <PrintingSection />
       <GameAssets />
+      <Industries />
 
       {/* TODO, nesta ordem:
-          <Industries />
           <SocialProof />
           <Gallery />
           <Faq />

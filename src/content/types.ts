@@ -171,7 +171,7 @@ export interface HomeContent {
     ctaLabel: string;
     ctaHref: Href;
   };
-  industries: { title: string; subtitle: string; items: Industry[] };
+  industries: { title: string; subtitle: string; prevLabel: string; nextLabel: string; items: Industry[] };
   social: { title: string; reviewLabel: string; reviewHref: Href; testimonials: Testimonial[] };
   gallery: { title: string; models: GalleryModel[] };
   faq: { title: string; items: FaqItem[] };

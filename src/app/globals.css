@@ -6,6 +6,7 @@
   --color-surface: #111318;
   --color-surface-2: #1a1d24;
   --color-line: #272b35;
+  --color-line-strong: #3d4350;
   --color-ink: #f2f4f8;
   --color-ink-muted: #9ba3b4;
   --color-accent: #4d6bff;
@@ -37,6 +38,8 @@
   /* ritmo */
   --spacing-section: clamp(80px, 10vw, 140px);
   --container-page: 1200px;
+  /* teto do card de carrossel: ~2,5 cards no conteúdo de 1200px */
+  --container-card: 27rem;
 
   /* breakpoints */
   --breakpoint-sm: 640px;
@@ -156,6 +159,29 @@
     font-family: var(--font-display);
     font-size: var(--text-sm);
     font-weight: 600;
+  }
+
+  /* ---- ScrollCarousel: 1º card na margem do Container, trilha até a borda da tela ---- */
+  .scroll-carousel__track {
+    /* mesmo px-6 md:px-10 do Container */
+    --carousel-gutter: calc(var(--spacing) * 6);
+    /* 100% = largura da trilha, que ocupa a seção inteira */
+    --carousel-start: calc(max(0px, (100% - var(--container-page)) / 2) + var(--carousel-gutter));
+    padding-inline: var(--carousel-start) var(--carousel-gutter);
+    /* início: o snap-start alinha na margem do Container, não na borda da tela;
+       fim: o snap-end do último card torna o scroll máximo um ponto de encaixe */
+    scroll-padding-inline: var(--carousel-start) var(--carousel-gutter);
+    scrollbar-width: none;
+  }
+
+  .scroll-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .scroll-carousel__track {
+      --carousel-gutter: calc(var(--spacing) * 10);
+    }
   }
 
   /* ---- entrada orquestrada: a única da página ---- */
