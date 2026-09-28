@@ -4,7 +4,7 @@ import MarqueePauseToggle from "@/components/ui/MarqueePauseToggle";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import TestimonialCard from "@/components/sections/TestimonialCard";
-import { home } from "@/content/home";
+import { getLocaleContent } from "@/content";
 import type { Testimonial } from "@/content/types";
 import { rotate, sectionTitleId } from "@/lib/utils";
 
@@ -13,7 +13,8 @@ const ID = "depoimentos";
 const cards = (items: Testimonial[]) =>
   items.map((item) => <TestimonialCard key={item.avatar} testimonial={item} />);
 
-export default function SocialProof() {
+export default async function SocialProof() {
+  const { home } = await getLocaleContent();
   const { title, reviewLabel, reviewHref, externalHint, pauseLabel, resumeLabel, testimonials } = home.social;
 
   return (

@@ -15,7 +15,8 @@ próprios. Ver `docs/01-analise-referencia.md`.
 - TypeScript strict
 - Tailwind CSS v4 (tokens em `@theme` dentro de `src/app/globals.css`)
 - `next/image` para toda imagem — nunca `<img>`
-- `next-intl` para pt-BR / en (rota com prefixo: `/`, `/en`)
+- `next-intl` 3.x para pt-BR / en: pt-BR sem prefixo (`/`), en em `/en`; o
+  idioma só muda pela URL (sem detecção, sem cookie). Config em `src/i18n/`.
 - Sem biblioteca de animação: marquees e transições são CSS puro
 
 ## Regras não negociáveis
@@ -40,17 +41,34 @@ próprios. Ver `docs/01-analise-referencia.md`.
    nunca `<section>` cru. Ela aplica a regra 8 e `aria-labelledby` apontando
    para `sectionTitleId(id)` (`${id}-title`, em `src/lib/utils.ts`), que deve
    ir no título da seção (h1 do Hero, `SectionHeading id` nas demais).
+10. **Conteúdo só pelo ponto único `@/content`** (`src/content/index.ts`).
+    Nenhum arquivo importa `*.pt.ts`/`*.en.ts` direto (o lint barra).
+    - Server component: `const { home } = await getLocaleContent()`.
+    - Layout, páginas, `generateMetadata` e imagem OG (têm o locale nos params):
+      `getContent(locale)`.
+    - Client component: recebe os textos por props, nunca importa conteúdo.
+    - Todo arquivo de conteúdo existe nas duas línguas com o mesmo tipo e entra
+      em `SiteContent` (`types.ts`) e no mapa de `index.ts`.
+11. **Link interno usa `Link` de `@/i18n/navigation`**, nunca `next/link` (o lint
+    barra) — ele acrescenta o prefixo do idioma. Link externo continua `<a>`.
+12. Toda página em `app/[locale]/` chama `setRequestLocale(locale)` para
+    continuar estática.
 
 ## Estrutura
 
 ```
 src/
-  app/          layout, page, globals.css, sitemap, robots
+  app/          globals.css, icon.svg, sitemap, robots
+    [locale]/   layout (root, <html lang>), page, not-found, opengraph-image,
+                sandbox, [...rest] (404 localizada)
+  i18n/         routing, navigation (Link, usePathname), request
+  middleware.ts next-intl
   components/
     layout/     Header, Footer, AnnouncementBar
     sections/   uma seção da home por arquivo, na ordem da página
     ui/         Button, Marquee, Container, Section, SectionHeading, Accordion, Dropzone
-  content/      home.ts (dados), footer.ts, types.ts
+  content/      index.ts (getContent, getLocaleContent), types.ts e
+                {home,navigation,footer,seo,sandbox,notFound}.{pt,en}.ts
   lib/          utils.ts
   hooks/        usePasteImage.ts
 ```
@@ -84,6 +102,10 @@ Desenvolvimento é no Windows com PowerShell. Use comandos compatíveis
 
 Nunca rodar `npm run dev` em background; a verificação no navegador é manual.
 O Claude roda apenas `typecheck`, `lint` e `build`.
+
+O PowerShell é o 5.1: ao ler ou gravar arquivos por comando (Get-Content,
+Set-Content, Out-File), use sempre -Encoding utf8, senão os acentos se
+corrompem. Prefira as ferramentas de edição.
 
 Python não está instalado; edite arquivos com as ferramentas de edição, não com scripts Python.
 

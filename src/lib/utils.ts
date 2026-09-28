@@ -28,7 +28,7 @@ export function rotate<T>(items: T[], start: number): T[] {
   return [...items.slice(start), ...items.slice(0, start)];
 }
 
-/** Link externo abre em nova aba com <a>; interno usa next/link. */
+/** Link externo abre em nova aba com <a>; interno usa o Link de @/i18n/navigation (prefixo do idioma). */
 export const isExternalHref = (href: string) => href.startsWith("http");
 
 /** Id do título de uma seção — Section aponta aria-labelledby para ele. */

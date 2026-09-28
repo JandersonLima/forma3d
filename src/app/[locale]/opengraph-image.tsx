@@ -1,12 +1,29 @@
 import { ImageResponse } from "next/og";
-import { seo } from "@/content/seo";
+import { getContent } from "@/content";
+import type { Locale } from "@/content/types";
+import { routing } from "@/i18n/routing";
 import { theme } from "@/lib/theme";
 
-export const alt = seo.home.title;
+/**
+ * `alt` é export estático e não recebe o locale; generateImageMetadata resolveria,
+ * mas tira a rota da geração estática. Fica o alt do idioma padrão.
+ */
+export const alt = getContent(routing.defaultLocale).seo.home.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+/** Rotas de imagem não herdam os params do layout; sem isto a OG sai dinâmica. */
+export const generateStaticParams = () => routing.locales.map((locale) => ({ locale }));
+
+interface Params {
+  // No Next 15 as rotas de imagem recebem params já resolvido (Promise só no 16).
+  params: { locale: Locale };
+}
+
+export default function OpengraphImage({ params }: Params) {
+  const { locale } = params;
+  const { seo } = getContent(locale);
+
   return new ImageResponse(
     (
       <div

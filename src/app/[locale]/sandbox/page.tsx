@@ -1,23 +1,34 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Marquee from "@/components/ui/Marquee";
-import { sandbox } from "@/content/sandbox";
-import { seo } from "@/content/seo";
+import { getContent } from "@/content";
+import type { Locale } from "@/content/types";
+
+interface Props {
+  params: Promise<{ locale: Locale }>;
+}
 
 /** Fora do sitemap, bloqueada no robots.txt e noindex aqui. */
-export const metadata: Metadata = {
-  title: seo.sandbox.title,
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: getContent(locale).seo.sandbox.title,
+    robots: { index: false, follow: false },
+  };
+}
 
 /**
  * Página temporária para validar o design system. Removida quando as
  * seções da home (docs/03-plano-de-prompts.md) estiverem todas prontas.
  */
-export default function SandboxPage() {
-  const { buttonLabels, headings, marqueeTest } = sandbox;
+export default async function SandboxPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const { buttonLabels, headings, marqueeTest } = getContent(locale).sandbox;
 
   return (
     <main id="conteudo">

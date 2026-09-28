@@ -2,12 +2,13 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { home } from "@/content/home";
+import { getLocaleContent } from "@/content";
 import { sectionTitleId } from "@/lib/utils";
 
 const ID = "comecar";
 
-export default function FinalCta() {
+export default async function FinalCta() {
+  const { home } = await getLocaleContent();
   const { title, body, ctaLabel, ctaHref } = home.finalCta;
 
   return (

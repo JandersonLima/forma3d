@@ -1,12 +1,13 @@
-import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import HeaderScrollShell from "@/components/layout/HeaderScrollShell";
 import NavDropdown from "@/components/layout/NavDropdown";
 import MobileDrawer from "@/components/layout/MobileDrawer";
-import { navigation } from "@/content/navigation";
+import { getLocaleContent } from "@/content";
+import { Link } from "@/i18n/navigation";
 
-export default function Header() {
+export default async function Header() {
+  const { navigation } = await getLocaleContent();
   const { brand, headerNav, headerCta, mobileMenuLabel, mobileMenuCloseLabel, mobileMenuTitle } = navigation;
 
   return (

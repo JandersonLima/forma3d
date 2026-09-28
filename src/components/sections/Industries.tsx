@@ -2,12 +2,13 @@ import LinkCard from "@/components/ui/LinkCard";
 import ScrollCarousel from "@/components/ui/ScrollCarousel";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { home } from "@/content/home";
+import { getLocaleContent } from "@/content";
 import { sectionTitleId } from "@/lib/utils";
 
 const ID = "setores";
 
-export default function Industries() {
+export default async function Industries() {
+  const { home } = await getLocaleContent();
   const { title, subtitle, prevLabel, nextLabel, items } = home.industries;
 
   return (

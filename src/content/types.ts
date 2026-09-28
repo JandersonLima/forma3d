@@ -86,6 +86,11 @@ export interface FooterColumn {
   links: NavLink[];
 }
 
+export interface FooterContent {
+  columns: FooterColumn[];
+  socialLinks: NavLink[];
+}
+
 export interface Brand {
   name: string;
   href: Href;
@@ -202,4 +207,24 @@ export interface SeoContent {
   sandbox: Pick<PageSeo, "title">;
   /** Campos do JSON-LD SoftwareApplication da home. */
   app: { category: string; operatingSystem: string };
+}
+
+export interface NotFoundContent {
+  /** Vai no <title> e no h1 da página 404. */
+  title: string;
+  body: string;
+  homeLabel: string;
+}
+
+/** Idiomas do site — espelha `routing.locales` (src/i18n/routing.ts). */
+export type Locale = "pt-BR" | "en";
+
+/** Todo o conteúdo de um idioma — o que `getContent(locale)` devolve. */
+export interface SiteContent {
+  home: HomeContent;
+  navigation: NavigationContent;
+  footer: FooterContent;
+  seo: SeoContent;
+  sandbox: SandboxContent;
+  notFound: NotFoundContent;
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { Href, NavLink as NavLinkType } from "@/content/types";
 
 interface Props {

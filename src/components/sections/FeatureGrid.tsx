@@ -2,7 +2,7 @@ import Container from "@/components/ui/Container";
 import LinkCard from "@/components/ui/LinkCard";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { home } from "@/content/home";
+import { getLocaleContent } from "@/content";
 import { sectionTitleId } from "@/lib/utils";
 
 const ID = "recursos";
@@ -10,7 +10,8 @@ const ID = "recursos";
 /** 3 colunas no conteúdo de 1120px com gap-6 ≈ 357px por card. */
 const SIZES = "(min-width: 1200px) 360px, (min-width: 900px) 33vw, (min-width: 640px) 50vw, 100vw";
 
-export default function FeatureGrid() {
+export default async function FeatureGrid() {
+  const { home } = await getLocaleContent();
   const { title, items } = home.features;
 
   return (

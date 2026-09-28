@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { home } from "@/content/home";
+import { getLocaleContent } from "@/content";
 import { sectionTitleId } from "@/lib/utils";
 
 const ID = "impressao";
@@ -12,7 +12,8 @@ const ID = "impressao";
  * Ordem no DOM: heading → imagem → corpo. Abaixo de 900px isso já é o
  * empilhamento; a partir de 900px o grid leva a imagem para a coluna direita.
  */
-export default function PrintingSection() {
+export default async function PrintingSection() {
+  const { home } = await getLocaleContent();
   const {
     title,
     subtitle,

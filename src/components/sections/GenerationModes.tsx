@@ -2,12 +2,13 @@ import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ModeCard from "@/components/sections/ModeCard";
-import { home } from "@/content/home";
+import { getLocaleContent } from "@/content";
 import { sectionTitleId } from "@/lib/utils";
 
 const ID = "modos";
 
-export default function GenerationModes() {
+export default async function GenerationModes() {
+  const { home } = await getLocaleContent();
   const { eyebrow, title, subtitle, items } = home.modes;
 
   return (

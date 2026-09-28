@@ -1,9 +1,10 @@
-import Link from "next/link";
 import Container from "@/components/ui/Container";
-import { footerColumns, socialLinks } from "@/content/footer";
-import { navigation } from "@/content/navigation";
+import { getLocaleContent } from "@/content";
+import { Link } from "@/i18n/navigation";
 
-export default function Footer() {
+export default async function Footer() {
+  const { footer, navigation } = await getLocaleContent();
+  const { columns: footerColumns, socialLinks } = footer;
   const year = new Date().getFullYear();
 
   return (

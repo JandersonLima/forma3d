@@ -4,7 +4,7 @@ import MarqueePauseToggle from "@/components/ui/MarqueePauseToggle";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GalleryCard from "@/components/sections/GalleryCard";
-import { home } from "@/content/home";
+import { getLocaleContent } from "@/content";
 import type { GalleryModel } from "@/content/types";
 import { rotate, sectionTitleId } from "@/lib/utils";
 
@@ -13,7 +13,8 @@ const ID = "galeria";
 const cards = (items: GalleryModel[]) =>
   items.map((model) => <GalleryCard key={model.href} model={model} />);
 
-export default function Gallery() {
+export default async function Gallery() {
+  const { home } = await getLocaleContent();
   const { title, pauseLabel, resumeLabel, models } = home.gallery;
 
   return (

@@ -5,13 +5,14 @@ import Dropzone from "@/components/ui/Dropzone";
 import Marquee from "@/components/ui/Marquee";
 import Section from "@/components/ui/Section";
 import ShowcaseCard from "@/components/sections/ShowcaseCard";
-import { home } from "@/content/home";
+import { getLocaleContent } from "@/content";
 import { sectionTitleId } from "@/lib/utils";
 
 /** Passo da entrada orquestrada (globals.css, .hero-enter). */
 const enterStep = (step: number) => ({ "--enter-step": step }) as CSSProperties;
 
-export default function Hero() {
+export default async function Hero() {
+  const { home } = await getLocaleContent();
   const { hero, showcase, partners } = home;
 
   return (

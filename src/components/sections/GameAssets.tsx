@@ -5,12 +5,13 @@ import Marquee from "@/components/ui/Marquee";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GameFeatureRow from "@/components/sections/GameFeatureRow";
-import { home } from "@/content/home";
+import { getLocaleContent } from "@/content";
 import { sectionTitleId } from "@/lib/utils";
 
 const ID = "jogos";
 
-export default function GameAssets() {
+export default async function GameAssets() {
+  const { home } = await getLocaleContent();
   const { title, subtitle, features, enginesLabel, engines, ctaLabel, ctaHref } = home.games;
 
   return (

@@ -1,4 +1,4 @@
-import { navigation } from "./navigation";
+import { navigation } from "./navigation.en";
 import type { SeoContent } from "./types";
 
 const siteName = navigation.brand.name;
