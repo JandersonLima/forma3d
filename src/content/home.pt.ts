@@ -1,3 +1,4 @@
+import { appUrl } from "@/lib/site";
 import type { HomeContent } from "./types";
 
 /**
@@ -5,7 +6,6 @@ import type { HomeContent } from "./types";
  * Os textos abaixo são placeholders originais — reescreva para a sua marca.
  * As imagens apontam para /public/images; troque pelos seus renders.
  */
-const APP = process.env.NEXT_PUBLIC_APP_URL ?? "/app";
 
 export const home: HomeContent = {
   hero: {
@@ -24,7 +24,7 @@ export const home: HomeContent = {
       },
     },
     ctaLabel: "Gerar meu primeiro modelo",
-    ctaHref: APP,
+    ctaHref: appUrl,
   },
 
   // 6 itens: cada card mostra a entrada e o resultado, trocando no hover.
@@ -60,7 +60,7 @@ export const home: HomeContent = {
         title: "Quando cada relevo importa",
         body: "Indicado para render, VFX, impressão em resina e foto de produto — situações em que você esculpe primeiro e faz a retopologia depois.",
         ctaLabel: "Testar alta definição",
-        ctaHref: APP,
+        ctaHref: appUrl,
       },
       {
         id: "mesh",
@@ -71,7 +71,7 @@ export const home: HomeContent = {
         title: "Abre na engine sem retrabalho",
         body: "Topologia limpa e contagem de polígonos sob seu controle, para jogos, animação e headsets — sem passar por retopologia manual.",
         ctaLabel: "Testar malha limpa",
-        ctaHref: APP,
+        ctaHref: appUrl,
       },
     ],
   },
@@ -90,7 +90,7 @@ export const home: HomeContent = {
     image: "/images/printing/printer.webp",
     alt: "Impressora 3D produzindo um modelo gerado na plataforma",
     ctaLabel: "Preparar para impressão",
-    ctaHref: APP,
+    ctaHref: appUrl,
     compatibleLabel: "Compatível com",
     compatible: [
       { name: "Fatiador 1", src: "/images/logos/slicer-1.svg" },
@@ -117,7 +117,7 @@ export const home: HomeContent = {
       { name: "Engine 6", src: "/images/logos/engine-6.svg" },
     ],
     ctaLabel: "Começar sem custo",
-    ctaHref: APP,
+    ctaHref: appUrl,
   },
 
   industries: {
@@ -162,7 +162,7 @@ export const home: HomeContent = {
     models: Array.from({ length: 12 }, (_, i) => ({
       thumb: `/images/gallery/model-${String(i + 1).padStart(2, "0")}.webp`,
       name: `Modelo ${i + 1}`,
-      href: `${APP}/galeria/modelo-${i + 1}`,
+      href: `${appUrl}/galeria/modelo-${i + 1}`,
     })),
   },
 
@@ -196,6 +196,6 @@ export const home: HomeContent = {
     title: "Comece pelo primeiro modelo",
     body: "Sem curva de aprendizado e sem instalar nada. Leva menos de um minuto.",
     ctaLabel: "Criar agora",
-    ctaHref: APP,
+    ctaHref: appUrl,
   },
 };

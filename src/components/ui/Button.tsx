@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
+import { isAppHref } from "@/lib/site";
 import { cn, isExternalHref } from "@/lib/utils";
 
 type Variant = "primary" | "ghost";
@@ -31,8 +32,17 @@ export default function Button({ children, href, variant = "primary", size = "md
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
-    return isExternalHref(href) ? (
-      <a className={classes} href={href} rel="noopener noreferrer" target="_blank" onClick={onClick}>
+    if (isExternalHref(href)) {
+      return (
+        <a className={classes} href={href} rel="noopener noreferrer" target="_blank" onClick={onClick}>
+          {children}
+        </a>
+      );
+    }
+
+    // O app não tem versão por idioma: sai sem o prefixo que o Link acrescentaria.
+    return isAppHref(href) ? (
+      <a className={classes} href={href} onClick={onClick}>
         {children}
       </a>
     ) : (

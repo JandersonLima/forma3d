@@ -26,6 +26,10 @@ export default async function Footer() {
                       >
                         {link.label}
                       </a>
+                    ) : link.localized === false ? (
+                      <a href={link.href} className="text-[length:var(--text-sm)] text-ink-muted hover:text-ink">
+                        {link.label}
+                      </a>
                     ) : (
                       <Link href={link.href} className="text-[length:var(--text-sm)] text-ink-muted hover:text-ink">
                         {link.label}

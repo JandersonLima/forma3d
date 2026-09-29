@@ -49,8 +49,14 @@ próprios. Ver `docs/01-analise-referencia.md`.
     - Client component: recebe os textos por props, nunca importa conteúdo.
     - Todo arquivo de conteúdo existe nas duas línguas com o mesmo tipo e entra
       em `SiteContent` (`types.ts`) e no mapa de `index.ts`.
+    - **Todo texto novo entra nos dois arquivos de idioma (`.pt.ts` e `.en.ts`)
+      na mesma mudança** — em inglês de produto, não tradução literal.
 11. **Link interno usa `Link` de `@/i18n/navigation`**, nunca `next/link` (o lint
     barra) — ele acrescenta o prefixo do idioma. Link externo continua `<a>`.
+    - `NavLink` com `localized: false` sai como `<a>` comum, sem prefixo de idioma
+      e na mesma aba (ex.: API e Editor no rodapé).
+    - O app (`appUrl`/`isAppHref` em `src/lib/site.ts`) nunca leva prefixo:
+      conteúdo usa `appUrl`, e Button/GalleryCard já saem com `<a>` para ele.
 12. Toda página em `app/[locale]/` chama `setRequestLocale(locale)` para
     continuar estática.
 
@@ -61,10 +67,10 @@ src/
   app/          globals.css, icon.svg, sitemap, robots
     [locale]/   layout (root, <html lang>), page, not-found, opengraph-image,
                 sandbox, [...rest] (404 localizada)
-  i18n/         routing, navigation (Link, usePathname), request
+  i18n/         routing, navigation (Link, usePathname), request, alternates (hreflang)
   middleware.ts next-intl
   components/
-    layout/     Header, Footer, AnnouncementBar
+    layout/     Header, Footer, AnnouncementBar, MobileDrawer, LocaleSwitcher
     sections/   uma seção da home por arquivo, na ordem da página
     ui/         Button, Marquee, Container, Section, SectionHeading, Accordion, Dropzone
   content/      index.ts (getContent, getLocaleContent), types.ts e

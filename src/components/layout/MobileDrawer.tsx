@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/ui/Button";
-import type { Brand, Href, NavItem } from "@/content/types";
+import LocaleSwitcher from "@/components/layout/LocaleSwitcher";
+import type { Brand, Href, NavItem, NavigationContent } from "@/content/types";
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -15,9 +16,10 @@ interface Props {
   openLabel: string;
   closeLabel: string;
   title: string;
+  localeSwitcher: NavigationContent["localeSwitcher"];
 }
 
-export default function MobileDrawer({ nav, cta, brand, openLabel, closeLabel, title }: Props) {
+export default function MobileDrawer({ nav, cta, brand, openLabel, closeLabel, title, localeSwitcher }: Props) {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -179,6 +181,8 @@ export default function MobileDrawer({ nav, cta, brand, openLabel, closeLabel, t
                 ),
               )}
             </nav>
+
+            <LocaleSwitcher label={localeSwitcher.label} names={localeSwitcher.names} />
 
             <Button href={cta.href} size="lg" onClick={close} className="w-full">
               {cta.label}

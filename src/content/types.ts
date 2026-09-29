@@ -4,6 +4,8 @@ export interface NavLink {
   label: string;
   href: Href;
   external?: boolean;
+  /** `false`: sai como <a> comum, sem prefixo de idioma e na mesma aba (ex.: API, Editor). */
+  localized?: false;
 }
 
 export interface ShowcaseItem {
@@ -120,6 +122,8 @@ export interface NavigationContent {
   mobileMenuCloseLabel: string;
   /** Título/aria-label do painel da gaveta mobile quando aberta. */
   mobileMenuTitle: string;
+  /** Seletor de idioma: `label` é o aria-label do <nav>; `names`, cada idioma escrito nele mesmo. */
+  localeSwitcher: { label: string; names: Record<Locale, string> };
   /** Texto do copyright sem o ano — o componente prefixa "© {ano atual} ". */
   copyright: string;
 }

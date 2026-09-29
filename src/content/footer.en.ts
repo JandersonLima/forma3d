@@ -1,39 +1,40 @@
+import { appUrl } from "@/lib/site";
 import type { FooterContent } from "./types";
 
 export const footer: FooterContent = {
   columns: [
     {
-      title: "Produto",
+      title: "Product",
       links: [
-        { label: "Editor", href: "/app" },
-        { label: "API", href: "/api" },
-        { label: "Planos", href: "/planos" },
+        { label: "Editor", href: appUrl, localized: false },
+        { label: "API", href: "/api", localized: false },
+        { label: "Pricing", href: "/planos" },
       ],
     },
     {
-      title: "Recursos",
+      title: "Features",
       links: [
-        { label: "Imagem para 3D", href: "/recursos/imagem-para-3d" },
-        { label: "Texto para 3D", href: "/recursos/texto-para-3d" },
-        { label: "Retopologia", href: "/recursos/retopologia" },
-        { label: "Texturização", href: "/recursos/textura" },
-        { label: "Segmentação", href: "/recursos/segmentacao" },
+        { label: "Image to 3D", href: "/recursos/imagem-para-3d" },
+        { label: "Text to 3D", href: "/recursos/texto-para-3d" },
+        { label: "Retopology", href: "/recursos/retopologia" },
+        { label: "Texturing", href: "/recursos/textura" },
+        { label: "Segmentation", href: "/recursos/segmentacao" },
         { label: "Rigging", href: "/recursos/rigging" },
       ],
     },
     {
-      title: "Soluções",
+      title: "Solutions",
       links: [
-        { label: "Impressão 3D", href: "/solucoes/impressao-3d" },
-        { label: "Jogos", href: "/solucoes/jogos" },
-        { label: "Animação", href: "/solucoes/animacao" },
+        { label: "3D printing", href: "/solucoes/impressao-3d" },
+        { label: "Games", href: "/solucoes/jogos" },
+        { label: "Animation", href: "/solucoes/animacao" },
         { label: "E-commerce", href: "/solucoes/ecommerce" },
-        { label: "Design industrial", href: "/solucoes/design-industrial" },
-        { label: "Educação", href: "/solucoes/educacao" },
+        { label: "Industrial design", href: "/solucoes/design-industrial" },
+        { label: "Education", href: "/solucoes/educacao" },
       ],
     },
     {
-      title: "Integrações",
+      title: "Integrations",
       links: [
         { label: "Blender", href: "/integracoes/blender" },
         { label: "Unity", href: "/integracoes/unity" },
@@ -43,21 +44,21 @@ export const footer: FooterContent = {
       ],
     },
     {
-      title: "Conteúdo",
+      title: "Resources",
       links: [
         { label: "Blog", href: "/blog" },
-        { label: "Tutoriais", href: "/tutoriais" },
-        { label: "Galeria", href: "/galeria" },
-        { label: "Central de ajuda", href: "/ajuda" },
+        { label: "Tutorials", href: "/tutoriais" },
+        { label: "Gallery", href: "/galeria" },
+        { label: "Help center", href: "/ajuda" },
       ],
     },
     {
-      title: "Empresa",
+      title: "Company",
       links: [
-        { label: "Sobre", href: "/sobre" },
-        { label: "Contato", href: "/contato" },
-        { label: "Termos de uso", href: "/termos" },
-        { label: "Privacidade", href: "/privacidade" },
+        { label: "About", href: "/sobre" },
+        { label: "Contact", href: "/contato" },
+        { label: "Terms of use", href: "/termos" },
+        { label: "Privacy", href: "/privacidade" },
       ],
     },
   ],

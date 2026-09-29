@@ -3,12 +3,14 @@ import Button from "@/components/ui/Button";
 import HeaderScrollShell from "@/components/layout/HeaderScrollShell";
 import NavDropdown from "@/components/layout/NavDropdown";
 import MobileDrawer from "@/components/layout/MobileDrawer";
+import LocaleSwitcher from "@/components/layout/LocaleSwitcher";
 import { getLocaleContent } from "@/content";
 import { Link } from "@/i18n/navigation";
 
 export default async function Header() {
   const { navigation } = await getLocaleContent();
-  const { brand, headerNav, headerCta, mobileMenuLabel, mobileMenuCloseLabel, mobileMenuTitle } = navigation;
+  const { brand, headerNav, headerCta, mobileMenuLabel, mobileMenuCloseLabel, mobileMenuTitle, localeSwitcher } =
+    navigation;
 
   return (
     <HeaderScrollShell>
@@ -40,6 +42,7 @@ export default async function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <LocaleSwitcher label={localeSwitcher.label} names={localeSwitcher.names} className="hidden md:flex" />
           <Button href={headerCta.href} size="md" className="hidden md:inline-flex">
             {headerCta.label}
           </Button>
@@ -50,6 +53,7 @@ export default async function Header() {
             openLabel={mobileMenuLabel}
             closeLabel={mobileMenuCloseLabel}
             title={mobileMenuTitle}
+            localeSwitcher={localeSwitcher}
           />
         </div>
       </Container>

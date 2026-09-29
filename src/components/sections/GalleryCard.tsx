@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import type { GalleryModel } from "@/content/types";
+import { isAppHref } from "@/lib/site";
 import { isExternalHref } from "@/lib/utils";
 
 const classes =
@@ -20,8 +21,16 @@ export default function GalleryCard({ model }: { model: GalleryModel }) {
     </>
   );
 
-  return isExternalHref(model.href) ? (
-    <a className={classes} href={model.href} target="_blank" rel="noopener noreferrer">
+  if (isExternalHref(model.href)) {
+    return (
+      <a className={classes} href={model.href} target="_blank" rel="noopener noreferrer">
+        {content}
+      </a>
+    );
+  }
+
+  return isAppHref(model.href) ? (
+    <a className={classes} href={model.href}>
       {content}
     </a>
   ) : (

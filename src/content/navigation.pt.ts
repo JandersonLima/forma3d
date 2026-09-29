@@ -1,11 +1,10 @@
+import { appUrl } from "@/lib/site";
 import type { NavigationContent } from "./types";
-
-const APP = process.env.NEXT_PUBLIC_APP_URL ?? "/app";
 
 export const navigation: NavigationContent = {
   brand: { name: "Forma3D", href: "/" },
 
-    announcement: null,
+  announcement: null,
 
   headerNav: [
     {
@@ -39,11 +38,15 @@ export const navigation: NavigationContent = {
     { label: "Blog", href: "/blog" },
   ],
 
-  headerCta: { label: "Começar sem custo", href: APP },
+  headerCta: { label: "Começar sem custo", href: appUrl },
 
   skipLinkLabel: "Pular para o conteúdo",
   mobileMenuLabel: "Abrir menu",
   mobileMenuCloseLabel: "Fechar menu",
   mobileMenuTitle: "Menu de navegação",
+  localeSwitcher: {
+    label: "Idioma",
+    names: { "pt-BR": "Português", en: "English" },
+  },
   copyright: "Forma3D. Todos os direitos reservados.",
 };

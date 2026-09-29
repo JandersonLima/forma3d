@@ -6,15 +6,15 @@ const siteName = navigation.brand.name;
 export const seo: SeoContent = {
   siteName,
   titleTemplate: `%s | ${siteName}`,
-  defaultTitle: `${siteName} — gerador de modelos 3D com IA`,
+  defaultTitle: `${siteName} — AI 3D model generator`,
   defaultDescription:
-    "Transforme fotos, esboços ou descrições em modelos 3D texturizados, prontos para jogos, impressão 3D e animação.",
-  ogLocale: "pt_BR",
+    "Turn photos, sketches or text descriptions into textured 3D models, ready for games, 3D printing and animation.",
+  ogLocale: "en_US",
   home: {
-    title: "Gerador de modelos 3D com IA",
+    title: "AI 3D model generator",
     description:
-      "Transforme fotos, esboços ou descrições em modelos 3D texturizados e prontos para jogos, impressão 3D e animação. Sem instalar nada.",
+      "Turn photos, sketches or text descriptions into textured 3D models, ready for games, 3D printing and animation. Nothing to install.",
   },
-  sandbox: { title: "Sandbox do design system" },
+  sandbox: { title: "Design system sandbox" },
   app: { category: "DesignApplication", operatingSystem: "Web" },
 };

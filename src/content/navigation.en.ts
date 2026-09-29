@@ -1,49 +1,52 @@
+import { appUrl } from "@/lib/site";
 import type { NavigationContent } from "./types";
-
-const APP = process.env.NEXT_PUBLIC_APP_URL ?? "/app";
 
 export const navigation: NavigationContent = {
   brand: { name: "Forma3D", href: "/" },
 
-    announcement: null,
+  announcement: null,
 
   headerNav: [
     {
-      label: "Recursos",
+      label: "Features",
       href: "/recursos",
-      overviewLabel: "Ver todos os recursos",
+      overviewLabel: "See all features",
       children: [
-        { label: "Imagem para 3D", href: "/recursos/imagem-para-3d" },
-        { label: "Texto para 3D", href: "/recursos/texto-para-3d" },
-        { label: "Retopologia", href: "/recursos/retopologia" },
-        { label: "Texturização", href: "/recursos/textura" },
-        { label: "Segmentação", href: "/recursos/segmentacao" },
+        { label: "Image to 3D", href: "/recursos/imagem-para-3d" },
+        { label: "Text to 3D", href: "/recursos/texto-para-3d" },
+        { label: "Retopology", href: "/recursos/retopologia" },
+        { label: "Texturing", href: "/recursos/textura" },
+        { label: "Segmentation", href: "/recursos/segmentacao" },
         { label: "Rigging", href: "/recursos/rigging" },
       ],
     },
     {
-      label: "Soluções",
+      label: "Solutions",
       href: "/solucoes",
-      overviewLabel: "Ver todas as soluções",
+      overviewLabel: "See all solutions",
       children: [
-        { label: "Impressão 3D", href: "/solucoes/impressao-3d" },
-        { label: "Jogos", href: "/solucoes/jogos" },
-        { label: "Animação", href: "/solucoes/animacao" },
+        { label: "3D printing", href: "/solucoes/impressao-3d" },
+        { label: "Games", href: "/solucoes/jogos" },
+        { label: "Animation", href: "/solucoes/animacao" },
         { label: "E-commerce", href: "/solucoes/ecommerce" },
-        { label: "Design industrial", href: "/solucoes/design-industrial" },
-        { label: "Educação", href: "/solucoes/educacao" },
+        { label: "Industrial design", href: "/solucoes/design-industrial" },
+        { label: "Education", href: "/solucoes/educacao" },
       ],
     },
-    { label: "Galeria", href: "/galeria" },
-    { label: "Planos", href: "/planos" },
+    { label: "Gallery", href: "/galeria" },
+    { label: "Pricing", href: "/planos" },
     { label: "Blog", href: "/blog" },
   ],
 
-  headerCta: { label: "Começar sem custo", href: APP },
+  headerCta: { label: "Start for free", href: appUrl },
 
-  skipLinkLabel: "Pular para o conteúdo",
-  mobileMenuLabel: "Abrir menu",
-  mobileMenuCloseLabel: "Fechar menu",
-  mobileMenuTitle: "Menu de navegação",
-  copyright: "Forma3D. Todos os direitos reservados.",
+  skipLinkLabel: "Skip to content",
+  mobileMenuLabel: "Open menu",
+  mobileMenuCloseLabel: "Close menu",
+  mobileMenuTitle: "Navigation menu",
+  localeSwitcher: {
+    label: "Language",
+    names: { "pt-BR": "Português", en: "English" },
+  },
+  copyright: "Forma3D. All rights reserved.",
 };

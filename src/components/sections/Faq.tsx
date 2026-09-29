@@ -1,3 +1,4 @@
+import { getLocale } from "next-intl/server";
 import Container from "@/components/ui/Container";
 import JsonLd from "@/components/ui/JsonLd";
 import Section from "@/components/ui/Section";
@@ -10,12 +11,14 @@ const ID = "faq";
 
 export default async function Faq() {
   const { home } = await getLocaleContent();
+  const locale = await getLocale();
   const { title, items } = home.faq;
 
   /** FAQPage sai só onde a seção é renderizada, montado dos mesmos itens da sanfona. */
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    inLanguage: locale,
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,

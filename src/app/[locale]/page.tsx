@@ -13,6 +13,7 @@ import SocialProof from "@/components/sections/SocialProof";
 import JsonLd from "@/components/ui/JsonLd";
 import { getContent } from "@/content";
 import type { Locale } from "@/content/types";
+import { localeAlternates } from "@/i18n/alternates";
 import { getPathname } from "@/i18n/navigation";
 import { absoluteUrl } from "@/lib/site";
 
@@ -24,14 +25,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const { seo } = getContent(locale);
   const { title, description } = seo.home;
-  // Canonical do próprio idioma (/ ou /en); hreflang entra na próxima etapa.
+  // Canonical do próprio idioma (/ ou /en) e hreflang para todos, com x-default no pt-BR.
   const url = getPathname({ href: "/", locale });
 
   return {
     // O template do layout só vale para segmentos filhos; a home está no mesmo segmento.
     title: { absolute: seo.titleTemplate.replace("%s", title) },
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: url, languages: localeAlternates("/") },
     // openGraph/twitter do filho substituem os do layout por inteiro — repete os campos comuns.
     openGraph: { type: "website", locale: seo.ogLocale, siteName: seo.siteName, url, title, description },
     twitter: { card: "summary_large_image", title, description },
@@ -50,6 +51,7 @@ export default async function HomePage({ params }: Props) {
     name: seo.siteName,
     description: seo.home.description,
     url: absoluteUrl(getPathname({ href: "/", locale })),
+    inLanguage: locale,
     applicationCategory: seo.app.category,
     operatingSystem: seo.app.operatingSystem,
   };

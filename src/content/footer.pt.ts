@@ -1,3 +1,4 @@
+import { appUrl } from "@/lib/site";
 import type { FooterContent } from "./types";
 
 export const footer: FooterContent = {
@@ -5,8 +6,8 @@ export const footer: FooterContent = {
     {
       title: "Produto",
       links: [
-        { label: "Editor", href: "/app" },
-        { label: "API", href: "/api" },
+        { label: "Editor", href: appUrl, localized: false },
+        { label: "API", href: "/api", localized: false },
         { label: "Planos", href: "/planos" },
       ],
     },
