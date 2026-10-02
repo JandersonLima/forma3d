@@ -1,5 +1,11 @@
 # Análise da referência — tripo3d.ai/pt
 
+> 📌 **Documento de planejamento.** Este é o briefing original, mantido como histórico.
+> Caminhos, tipos e quantidades citados aqui (ex.: `src/content/home.ts`, `PrintStep[]`,
+> número de depoimentos e de modelos, `og.webp`) podem não bater com o código. A
+> referência atual é o [`CLAUDE.md`](../CLAUDE.md); para a forma do conteúdo,
+> `src/content/types.ts`.
+
 Engenharia reversa da **estrutura, layout e padrões de interação** da home do Tripo 3D
 (versão pt-BR), usada como briefing deste projeto.
 

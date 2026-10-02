@@ -25,9 +25,18 @@ próprios. Ver `docs/01-analise-referencia.md`.
    Se um componente precisa de uma string nova, adicione ao content file e passe por prop.
 2. **Zero cor/espaçamento solto.** Só tokens do `@theme`. Se faltar token, crie um.
 3. `"use client"` só onde há estado, evento ou hook — critério, não lista fechada.
-   Casos previstos: Dropzone, showcase do hero, Header (efeito de scroll) e
-   seletor de idioma. O accordion do FAQ usa `<details>`/`<summary>` e continua
-   server component. Todo o resto é server.
+   Hoje são 7:
+   - `layout/HeaderScrollShell`: estado `scrolled` e listener de scroll (o
+     `Header` em si é server e envolve seu conteúdo nele);
+   - `layout/NavDropdown`: aberto/fechado, Esc, clique fora e saída do foco;
+   - `layout/MobileDrawer`: estado, focus trap, trava de scroll e `inert` no resto;
+   - `layout/LocaleSwitcher`: `useLocale` e `usePathname` para o href do outro idioma;
+   - `ui/Dropzone`: estado, drag & drop, input de arquivo e colar;
+   - `ui/MarqueePauseToggle`: estado pausado;
+   - `ui/ScrollCarousel`: ref da trilha, estado das pontas e `scrollBy`.
+   O showcase do hero troca antes/depois só com CSS e é server. O accordion do
+   FAQ usa `<details>`/`<summary>` e também é server. Hooks (`usePasteImage`) não
+   levam a diretiva. Todo o resto é server.
 4. Um componente por arquivo, nomeado igual ao arquivo, export default.
 5. Não copie textos, imagens ou logotipos do site de referência.
 6. `prefers-reduced-motion: reduce` desliga todos os marquees.
@@ -70,30 +79,44 @@ próprios. Ver `docs/01-analise-referencia.md`.
 
 ```
 src/
-  app/          globals.css, icon.svg, sitemap, robots
-    og/[locale] route handler estático da imagem de compartilhamento (fontes em
-                src/assets/fonts)
-    [locale]/   layout (root, <html lang>), page, not-found,
+  app/          layout.tsx (só repassa children; importa globals.css e as fontes),
+                not-found.tsx (404 global, regra 13), globals.css, icon.svg,
+                sitemap.ts, robots.ts
+    og/[locale]/ route.tsx: imagem de compartilhamento, PNG estático por idioma
+    [locale]/   layout (<html lang>, header, footer), page, not-found,
                 [...rest] (404 localizada)
-  i18n/         routing, navigation (Link, usePathname), request, alternates (hreflang)
+  assets/fonts/ TTF estáticos + licenças OFL usados só pela imagem OG
+  i18n/         routing, navigation (Link, usePathname, getPathname), request,
+                alternates (hreflang)
   middleware.ts next-intl
   components/
-    layout/     Header, Footer, AnnouncementBar, MobileDrawer, LocaleSwitcher
-    sections/   uma seção da home por arquivo, na ordem da página
-    ui/         Button, Marquee, Container, Section, SectionHeading, Accordion, Dropzone
+    layout/     AnnouncementBar, Header, HeaderScrollShell, NavDropdown,
+                MobileDrawer, LocaleSwitcher, Footer
+    sections/   seções da home na ordem da página: Hero, GenerationModes,
+                PrintingSection, GameAssets, Industries, SocialProof, Gallery,
+                Faq, FeatureGrid, FinalCta; partes delas: ShowcaseCard, ModeCard,
+                GameFeatureRow, TestimonialCard, GalleryCard, FaqItem; e
+                NotFoundMain (corpo das duas 404)
+    ui/         Button, Container, Dropzone, ExternalLink (único target="_blank"),
+                JsonLd, LinkCard, Marquee, MarqueePauseToggle, ScrollCarousel,
+                Section, SectionHeading
   content/      index.ts (getContent, getLocaleContent), types.ts e
                 {home,navigation,footer,seo,notFound}.{pt,en}.ts
-  lib/          utils.ts
+  lib/          utils (cn, sectionTitleId, isExternalHref, rotate, validação de
+                upload), site (siteUrl,
+                appUrl, isAppHref, ogImagePath), theme (cores para onde CSS não
+                chega), jsonLd (serializeJsonLd), fonts (next/font)
   hooks/        usePasteImage.ts
+public/images/  placeholders (substituir antes de publicar)
 ```
 
 ## Comandos
 
 ```bash
-npm run dev      # localhost:3000
-npm run build    # obrigatório rodar antes de commitar
-npm run lint
-npm run typecheck
+npm run dev        # localhost:3000 (só o usuário roda)
+npm run build      # obrigatório rodar antes de commitar
+npm run lint       # ESLint CLI (eslint .), flat config em eslint.config.mjs
+npm run typecheck  # tsc --noEmit
 ```
 
 ## Definição de pronto (cada seção)

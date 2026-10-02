@@ -227,6 +227,8 @@ ink-muted 0,3646 · ink 0,9036.
   o h3 na navegação por títulos. NVDA/JAWS com Chrome listam.
 - **Correção:** manter e registrar como trade-off conhecido. Não há marcação válida que
   ponha o `summary` dentro do heading.
+- **Status:** ✅ registrado em 02/10/2026 como trade-off conhecido, sem mudança no código.
+  Anotado na seção de acessibilidade do `docs/02-design-system.md`.
 
 ### A16 · Baixa · Limites de controles com 1,41:1
 - **Onde:** `src/components/ui/Dropzone.tsx:85` e `:120`; `src/components/ui/Button.tsx:14`;
@@ -541,6 +543,32 @@ Todos se justificam. O showcase do hero, que a regra 3 do CLAUDE.md lista como c
   anteriores ao i18n). Manter como histórico, com uma nota de que os caminhos atuais
   estão no CLAUDE.md.
 
+**Status:** ✅ resolvido em 02/10/2026, sem mudança de código.
+- **README:** reescrito. O que é o projeto, como rodar no PowerShell (`Copy-Item`), os
+  dois idiomas, `NEXT_PUBLIC_SITE_URL` e `NEXT_PUBLIC_APP_URL` com fallback e efeito,
+  tabela de comandos, mapa dos documentos e checklist "Antes de publicar" com K3 (e o
+  `Select-String` de conferência), K4, variáveis de produção, revisão do `npm audit` e
+  build final. Saíram o "scaffold", o `TODO` e o `public/images/` vazio.
+- **CLAUDE.md:** regra 3 com os 7 client components reais e o motivo de cada um
+  (showcase e Header são server; o client é o `HeaderScrollShell`). Estrutura completa:
+  `app/layout.tsx` e `app/not-found.tsx`, `og/[locale]`, `assets/fonts`, `NavDropdown`,
+  `HeaderScrollShell`, as partes das seções, `ExternalLink`, `JsonLd`, `LinkCard`,
+  `MarqueePauseToggle`, `ScrollCarousel`, os 5 arquivos de `lib/` e `public/images/`; sem
+  `Accordion`, `scripts/` e sandbox. Comandos com `lint` = `eslint .`. Regras 10–13
+  intocadas (a 10 já tinha sido ajustada em H8).
+- **docs/02:** tokens atuais, incluindo os das sessões 8.2a–8.2c (`line-control`,
+  `text-xs`, `measure-*`, `spacing-header`, `spacing-marquee-*`) e os que faltavam
+  (`accent-strong`, `line-strong`, `container-*`); sem `--color-ok`. Tabela de contraste
+  com a regra de que `accent` só passa AA sobre void. Medidas reais: padding de 40px a
+  partir de 900px, `--measure-body` 60ch (o 65ch saiu, ver H7), esteiras 40–66s, colunas
+  reais em vez do grid de 12, sem o halo. Acessibilidade com `inert`, pausa, região
+  focável, Dropzone, `ExternalLink`, gaveta e o trade-off A15.
+- **docs/01 e docs/03:** nota no topo de cada um: documento de planejamento mantido como
+  histórico, com o `CLAUDE.md` como referência atual. Corpo intocado.
+- **Fora do relatório:** `npm audit` em 02/10/2026 aponta 3 itens (`postcss` interno do
+  `next`, alta; `next-intl` ≤ 4.9.1 e `next`, moderadas), corrigíveis só com major (Next 16,
+  next-intl 4). Nada foi atualizado; ficou como item do checklist do README.
+
 ---
 
 ## 4. Pendências conhecidas
@@ -627,7 +655,8 @@ Cada passo termina com `npm run typecheck`, `npm run lint` e `npm run build` pas
 7. **Desempenho:** P1, P2. ✅ 02/10/2026
 8. **Limpeza:** H3 (sandbox), H5, H6, H7, H8, H4 (`eslint .`), H2 (script). ✅ 02/10/2026
 9. **Imagem OG:** K1, K2. ✅ 02/10/2026
-10. **Documentação:** H9, por último, para refletir o código final.
+10. **Documentação:** H9, por último, para refletir o código final; registro do A15.
+    ✅ 02/10/2026
 11. **Antes de publicar:** K3 e K4.
 
 ## 7. Fora da auditoria (sessão de 02/10/2026)
@@ -644,3 +673,58 @@ Cada passo termina com `npm run typecheck`, `npm run lint` e `npm run build` pas
     0,24 s, CLS 0, INP 8 ms. O elemento de LCP é `img.object-cover` (imagem do
     showcase), não o h1. ✅ Encerrado: a animação de entrada do h1 fica como está, e a
     correção proposta acima não será aplicada.
+
+## 8. Quadro-resumo (02/10/2026)
+
+### Resolvidos nas sessões 8.2a a 8.2d
+
+| ID | Severidade | Item | Status |
+|---|---|---|---|
+| A1 | Alta | Pausa das esteiras do hero e das engines | ✅ 01/10 |
+| A2 | Alta | CTAs do app e galeria em nova aba | ✅ 01/10 |
+| A3 | Alta | Contraste do "ver tudo" do dropdown | ✅ 01/10 |
+| A4 | Média | Contraste do hover da nav com header rolado | ✅ 01/10 |
+| A5 | Média | Contraste do link da AnnouncementBar | ✅ 01/10 |
+| A6 | Média | Aviso de nova aba para leitor de tela | ✅ 01/10 |
+| A7 | Média | h2 do rodapé (hierarquia de títulos) | ✅ 01/10 |
+| A8 | Média | Dropzone: nome e instrução acessíveis | ✅ 01/10 |
+| A9 | Média | Dropzone: foco e anúncio ao aceitar | ✅ 01/10 |
+| A10 | Média | Header sticky cobrindo foco e âncoras | ✅ 01/10 |
+| A11 | Média | Esteiras roláveis por teclado em reduced-motion | ✅ 01/10 |
+| A12 | Média | 404 global com `lang`, estilo e pt-BR | ✅ 01/10 |
+| A13 | Baixa | Dropdown como disclosure, fecha ao perder o foco | ✅ 01/10 |
+| A14 | Baixa | Nome da `<nav>` principal | ✅ 01/10 |
+| A15 | Baixa | Heading dentro de `<summary>` | ✅ 02/10, registrado como trade-off conhecido (sem mudança) |
+| A16 | Baixa | Limite da Dropzone com 3:1 (`line-control`) | ✅ 01/10 |
+| A17 | Baixa | Altura dos links do rodapé | ✅ 01/10 |
+| A18 | Baixa | Transições desligadas em reduced-motion | ✅ 01/10 |
+| A19 | Baixa | `inert` com a gaveta aberta | ✅ 01/10 |
+| A20 | Baixa | Erro da Dropzone associado e reanunciado | ✅ 01/10 |
+| A21 | Baixa | Outline da galeria sob a máscara | ✅ 01/10 |
+| A22 | Baixa | `<title>` da 404 | ✅ 01/10 |
+| P1 | Baixa | `priority` só nas imagens visíveis do showcase | ✅ 02/10 |
+| P2 | Baixa | `sizes` da galeria no mobile | ✅ 02/10 |
+| H1 | Média | Escape do JSON-LD | ✅ 01/10 |
+| H2 | Média | Script de placeholders quebrado | ✅ 02/10 (removido) |
+| H3 | Média | Sandbox | ✅ 02/10 (removida) |
+| H4 | Média | `next lint` → `eslint .` | ✅ 02/10 |
+| H5 | Baixa | Código sem uso | ✅ 02/10 |
+| H6 | Baixa | `.gitkeep` sobrando | ✅ 02/10 |
+| H7 | Baixa | Valores soltos → tokens | ✅ 02/10 |
+| H8 | Baixa | Regra 10 e imports dentro de `content/` | ✅ 02/10 |
+| H9 | Média / Baixa | README, CLAUDE.md, docs 01, 02 e 03 | ✅ 02/10 |
+| K1 | Média | `alt` da imagem OG por idioma | ✅ 02/10 |
+| K2 | Baixa | Fontes do site na imagem OG | ✅ 02/10 |
+
+Fora do relatório, também encerrados: meta `robots` duplicada na 404 global e medição do
+LCP (§7).
+
+### Pendentes: dependem do Janderson (bloqueiam a publicação)
+
+| ID | Severidade | Item | O que falta |
+|---|---|---|---|
+| K3 | Alta | Conteúdo e imagens placeholder | Fornecer textos, números, depoimentos autorizados, logos, redes e imagens reais; depois rodar o `Select-String` do K3 sem ocorrências |
+| K4 | Alta | Links internos levam à 404 | Decidir cada destino (criar página, apontar ao real ou retirar) e unificar os slugs dos cards com a nav |
+| — | — | Revisão do `npm audit` | 3 itens (`postcss` via `next`, `next-intl` ≤ 4.9.1) só corrigíveis com Next 16 / next-intl 4: decidir upgrade ou aceite do risco |
+
+Os três estão no checklist "Antes de publicar" do `README.md`.

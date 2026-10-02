@@ -1,5 +1,10 @@
 # Plano de execução — prompts para o Claude Code
 
+> 📌 **Documento de planejamento.** Mantido como histórico das etapas de construção.
+> Caminhos anteriores ao i18n e à limpeza da etapa 8 (ex.: `src/app/page.tsx`,
+> `src/content/home.ts`, `footer.ts`, a sandbox) não existem mais. A referência atual
+> de estrutura, regras e comandos é o [`CLAUDE.md`](../CLAUDE.md).
+
 Uma etapa por sessão. Rode `npm run build` no fim de cada uma antes de seguir.
 Cole os prompts abaixo literalmente no Claude Code, dentro da pasta do projeto.
 
