@@ -16,10 +16,12 @@ interface Props {
   openLabel: string;
   closeLabel: string;
   title: string;
+  /** aria-label do <nav> da gaveta (`navigation.mainNavLabel`). */
+  navLabel: string;
   localeSwitcher: NavigationContent["localeSwitcher"];
 }
 
-export default function MobileDrawer({ nav, cta, brand, openLabel, closeLabel, title, localeSwitcher }: Props) {
+export default function MobileDrawer({ nav, cta, brand, openLabel, closeLabel, title, navLabel, localeSwitcher }: Props) {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -64,6 +66,20 @@ export default function MobileDrawer({ nav, cta, brand, openLabel, closeLabel, t
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  // Além do aria-modal: o cursor virtual de leitores mais antigos também não sai da gaveta.
+  useEffect(() => {
+    if (!open) return;
+    const outside = Array.from(document.querySelectorAll<HTMLElement>("main, footer"));
+    outside.forEach((element) => {
+      element.inert = true;
+    });
+    return () => {
+      outside.forEach((element) => {
+        element.inert = false;
+      });
+    };
   }, [open]);
 
   useEffect(() => {
@@ -131,7 +147,7 @@ export default function MobileDrawer({ nav, cta, brand, openLabel, closeLabel, t
               </button>
             </div>
 
-            <nav className="flex flex-1 flex-col gap-1">
+            <nav aria-label={navLabel} className="flex flex-1 flex-col gap-1">
               {nav.map((item) =>
                 item.children ? (
                   <div key={item.label} className="flex flex-col">

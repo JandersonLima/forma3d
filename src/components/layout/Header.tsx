@@ -9,17 +9,25 @@ import { Link } from "@/i18n/navigation";
 
 export default async function Header() {
   const { navigation } = await getLocaleContent();
-  const { brand, headerNav, headerCta, mobileMenuLabel, mobileMenuCloseLabel, mobileMenuTitle, localeSwitcher } =
-    navigation;
+  const {
+    brand,
+    headerNav,
+    headerCta,
+    mobileMenuLabel,
+    mobileMenuCloseLabel,
+    mobileMenuTitle,
+    localeSwitcher,
+    mainNavLabel,
+  } = navigation;
 
   return (
     <HeaderScrollShell>
-      <Container className="flex h-16 items-center justify-between gap-6">
+      <Container className="flex h-header items-center justify-between gap-6">
         <Link href={brand.href} className="text-[length:var(--text-h3)] text-ink">
           {brand.name}
         </Link>
 
-        <nav className="hidden items-center md:flex">
+        <nav aria-label={mainNavLabel} className="hidden items-center md:flex">
           {headerNav.map((item) =>
             item.children ? (
               <NavDropdown
@@ -53,6 +61,7 @@ export default async function Header() {
             openLabel={mobileMenuLabel}
             closeLabel={mobileMenuCloseLabel}
             title={mobileMenuTitle}
+            navLabel={mainNavLabel}
             localeSwitcher={localeSwitcher}
           />
         </div>

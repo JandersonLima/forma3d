@@ -18,6 +18,7 @@ export const home: HomeContent = {
       previewAlt: "Pré-visualização da imagem enviada",
       replaceLabel: "Trocar imagem",
       ctaWithImageLabel: "Gerar modelo desta imagem",
+      acceptedMessage: "Imagem pronta. Confira a pré-visualização e gere seu modelo.",
       errors: {
         type: "Formato não aceito. Use PNG, JPG ou WebP.",
         size: "Arquivo acima de 10 MB. Reduza a imagem e tente de novo.",
@@ -144,7 +145,6 @@ export const home: HomeContent = {
     title: "Mais de X mil criadores, Y milhões de modelos gerados",
     reviewLabel: "Ver avaliações",
     reviewHref: "https://exemplo.com/avaliacoes",
-    externalHint: "(abre em nova aba)",
     pauseLabel: "Pausar depoimentos",
     resumeLabel: "Retomar depoimentos",
     marqueeLabel: "Depoimentos de criadores",

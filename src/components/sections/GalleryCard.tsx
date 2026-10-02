@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ExternalLink from "@/components/ui/ExternalLink";
 import { Link } from "@/i18n/navigation";
 import type { GalleryModel } from "@/content/types";
 import { isAppHref } from "@/lib/site";
@@ -11,7 +12,7 @@ const classes =
  * O card inteiro é o link. Miniatura com alt vazio: o nome do modelo é o texto
  * do link e fica sempre no HTML — o CSS só alterna a opacity (globals.css).
  */
-export default function GalleryCard({ model }: { model: GalleryModel }) {
+export default function GalleryCard({ model, externalHint }: { model: GalleryModel; externalHint: string }) {
   const content = (
     <>
       <Image src={model.thumb} alt="" fill sizes="14rem" className="object-cover" />
@@ -31,9 +32,9 @@ export default function GalleryCard({ model }: { model: GalleryModel }) {
   }
 
   return isExternalHref(model.href) ? (
-    <a className={classes} href={model.href} target="_blank" rel="noopener noreferrer">
+    <ExternalLink className={classes} href={model.href} hint={externalHint}>
       {content}
-    </a>
+    </ExternalLink>
   ) : (
     <Link className={classes} href={model.href}>
       {content}

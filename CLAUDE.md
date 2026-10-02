@@ -59,6 +59,11 @@ próprios. Ver `docs/01-analise-referencia.md`.
       conteúdo usa `appUrl`, e Button/GalleryCard já saem com `<a>` para ele.
 12. Toda página em `app/[locale]/` chama `setRequestLocale(locale)` para
     continuar estática.
+13. A 404 global (`src/app/not-found.tsx`) não usa nada do next-intl (provider,
+    `Link`, `getLocale`, `setRequestLocale`): ela entra na árvore de todas as
+    rotas, e isso tira a home do pré-render ou fixa o idioma errado. Depois de
+    mexer em layouts ou na 404, confira que `.next/server/app/pt-BR.html` e
+    `en.html` existem e estão no idioma certo; o ● do build não basta.
 
 ## Estrutura
 

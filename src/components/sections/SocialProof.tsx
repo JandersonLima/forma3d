@@ -1,4 +1,5 @@
 import Container from "@/components/ui/Container";
+import ExternalLink from "@/components/ui/ExternalLink";
 import Marquee from "@/components/ui/Marquee";
 import MarqueePauseToggle from "@/components/ui/MarqueePauseToggle";
 import Section from "@/components/ui/Section";
@@ -14,23 +15,20 @@ const cards = (items: Testimonial[]) =>
   items.map((item) => <TestimonialCard key={item.avatar} testimonial={item} />);
 
 export default async function SocialProof() {
-  const { home } = await getLocaleContent();
-  const { title, reviewLabel, reviewHref, externalHint, pauseLabel, resumeLabel, marqueeLabel, testimonials } =
-    home.social;
+  const { home, navigation } = await getLocaleContent();
+  const { title, reviewLabel, reviewHref, pauseLabel, resumeLabel, marqueeLabel, testimonials } = home.social;
 
   return (
     <Section id={ID} className="flex flex-col gap-10">
       <Container className="flex flex-col items-center gap-4">
         <SectionHeading id={sectionTitleId(ID)} align="center" title={title} />
-        <a
+        <ExternalLink
           href={reviewHref}
-          target="_blank"
-          rel="noopener noreferrer"
+          hint={navigation.externalLinkHint}
           className="text-accent underline-offset-4 hover:text-accent-strong hover:underline"
         >
           {reviewLabel}
-          <span className="sr-only"> {externalHint}</span>
-        </a>
+        </ExternalLink>
       </Container>
 
       <MarqueePauseToggle pauseLabel={pauseLabel} resumeLabel={resumeLabel}>

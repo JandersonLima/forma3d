@@ -18,6 +18,7 @@ export const home: HomeContent = {
       previewAlt: "Preview of the uploaded image",
       replaceLabel: "Replace image",
       ctaWithImageLabel: "Generate a model from this image",
+      acceptedMessage: "Image ready. Check the preview and generate your model.",
       errors: {
         type: "Unsupported format. Use PNG, JPG or WebP.",
         size: "File is over 10 MB. Shrink the image and try again.",
@@ -144,7 +145,6 @@ export const home: HomeContent = {
     title: "X thousand creators, Y million models generated",
     reviewLabel: "Read reviews",
     reviewHref: "https://exemplo.com/avaliacoes",
-    externalHint: "(opens in a new tab)",
     pauseLabel: "Pause testimonials",
     resumeLabel: "Resume testimonials",
     marqueeLabel: "Creator testimonials",

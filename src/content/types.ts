@@ -24,6 +24,8 @@ export interface DropzoneContent {
   replaceLabel: string;
   /** Texto do CTA quando há uma imagem na pré-visualização. */
   ctaWithImageLabel: string;
+  /** Anunciado (role="status") quando a imagem é aceita e a prévia aparece. */
+  acceptedMessage: string;
   errors: Record<ImageFileError, string>;
 }
 
@@ -126,6 +128,12 @@ export interface NavigationContent {
   localeSwitcher: { label: string; names: Record<Locale, string> };
   /** Texto do copyright sem o ano — o componente prefixa "© {ano atual} ". */
   copyright: string;
+  /** Só para leitor de tela: acompanha todo link com target="_blank" (ExternalLink). */
+  externalLinkHint: string;
+  /** h2 invisível do rodapé, acima dos títulos das colunas (h3). */
+  footerTitle: string;
+  /** aria-label do <nav> principal (header e gaveta mobile). */
+  mainNavLabel: string;
 }
 
 export interface SandboxContent {
@@ -191,8 +199,6 @@ export interface HomeContent {
     title: string;
     reviewLabel: string;
     reviewHref: Href;
-    /** Só para leitor de tela: avisa que o link de avaliações abre em nova aba. */
-    externalHint: string;
     pauseLabel: string;
     resumeLabel: string;
     marqueeLabel: string;

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
@@ -9,12 +8,9 @@ import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/ui/JsonLd";
 import { getContent } from "@/content";
 import { isLocale, routing } from "@/i18n/routing";
+import { fontVariables } from "@/lib/fonts";
 import { absoluteUrl, siteUrl } from "@/lib/site";
 import { theme } from "@/lib/theme";
-import "../globals.css";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const display = Space_Grotesk({ subsets: ["latin"], variable: "--font-grotesk", display: "swap" });
 
 interface Props {
   children: React.ReactNode;
@@ -56,7 +52,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   };
 
   return (
-    <html lang={locale} className={`${inter.variable} ${display.variable}`}>
+    <html lang={locale} className={fontVariables}>
       <body>
         {/* Sem messages: os client components só precisam do locale para o Link. */}
         <NextIntlClientProvider locale={locale}>
@@ -66,7 +62,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           >
             {navigation.skipLinkLabel}
           </a>
-          <AnnouncementBar announcement={navigation.announcement} />
+          <AnnouncementBar announcement={navigation.announcement} externalHint={navigation.externalLinkHint} />
           <Header />
           {children}
           <Footer />

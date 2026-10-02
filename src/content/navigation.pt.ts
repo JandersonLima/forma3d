@@ -49,4 +49,7 @@ export const navigation: NavigationContent = {
     names: { "pt-BR": "Português", en: "English" },
   },
   copyright: "Forma3D. Todos os direitos reservados.",
+  externalLinkHint: "(abre em nova aba)",
+  footerTitle: "Mapa do site",
+  mainNavLabel: "Principal",
 };

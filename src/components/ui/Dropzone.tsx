@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type DragEvent } from "react";
+import { useCallback, useEffect, useId, useRef, useState, type DragEvent } from "react";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { usePasteImage } from "@/hooks/usePasteImage";
@@ -23,18 +23,29 @@ export default function Dropzone({
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const zoneRef = useRef<HTMLDivElement>(null);
+  const replaceRef = useRef<HTMLButtonElement>(null);
   const focusZoneRef = useRef(false);
+  const focusReplaceRef = useRef(false);
   const [isDragging, setIsDragging] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<ImageFileError | null>(null);
+  // Muda a cada rejeição: o alerta é remontado e o mesmo erro é anunciado de novo.
+  const [errorKey, setErrorKey] = useState(0);
+  const labelId = useId();
+  const hintId = useId();
+  const errorId = useId();
 
   const accept = useCallback(
     (file: File) => {
       const problem = validateImageFile(file);
       if (problem) {
         setError(problem);
+        setErrorKey((key) => key + 1);
         return;
       }
+      // A zona focada vai desmontar: o foco segue para "Trocar imagem". Colar ou
+      // soltar com o foco em outro lugar não o tira de onde está.
+      focusReplaceRef.current = document.activeElement === zoneRef.current;
       setError(null);
       setPreview(URL.createObjectURL(file));
       onFileAccepted?.(file);
@@ -49,11 +60,16 @@ export default function Dropzone({
     focusZoneRef.current = true;
   };
 
-  // Depois de "trocar imagem", o foco volta para a zona de envio.
+  // Depois de "trocar imagem", o foco volta para a zona de envio; ao aceitar a
+  // imagem pela zona, vai para "Trocar imagem".
   useEffect(() => {
     if (!preview && focusZoneRef.current) {
       focusZoneRef.current = false;
       zoneRef.current?.focus();
+    }
+    if (preview && focusReplaceRef.current) {
+      focusReplaceRef.current = false;
+      replaceRef.current?.focus();
     }
   }, [preview]);
 
@@ -82,7 +98,7 @@ export default function Dropzone({
   const frame = cn(
     "relative flex min-h-44 flex-col items-center justify-center gap-2",
     "rounded-[var(--radius-card)] border transition-colors duration-150",
-    isDragging ? "border-accent bg-accent-soft" : "border-line bg-surface",
+    isDragging ? "border-accent bg-accent-soft" : "border-line-control bg-surface",
   );
 
   return (
@@ -99,7 +115,7 @@ export default function Dropzone({
                 className="rounded-[var(--radius-card)] object-contain p-3"
               />
             </div>
-            <Button variant="ghost" onClick={clear}>
+            <Button ref={replaceRef} variant="ghost" onClick={clear}>
               {content.replaceLabel}
             </Button>
           </div>
@@ -108,7 +124,8 @@ export default function Dropzone({
             ref={zoneRef}
             role="button"
             tabIndex={0}
-            aria-label={content.label}
+            aria-labelledby={labelId}
+            aria-describedby={error ? `${hintId} ${errorId}` : hintId}
             onClick={() => inputRef.current?.click()}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
@@ -119,8 +136,12 @@ export default function Dropzone({
             {...dropHandlers}
             className={cn(frame, "cursor-pointer border-dashed px-6 py-10 hover:border-accent")}
           >
-            <span className="text-base font-medium">{content.label}</span>
-            <span className="text-sm text-ink-muted">{content.hint}</span>
+            <span id={labelId} className="text-base font-medium">
+              {content.label}
+            </span>
+            <span id={hintId} className="text-sm text-ink-muted">
+              {content.hint}
+            </span>
           </div>
         )}
 
@@ -137,8 +158,18 @@ export default function Dropzone({
           }}
         />
 
+        {/* sempre montada: a região só anuncia o que muda dentro dela */}
+        <p role="status" className="sr-only">
+          {preview ? content.acceptedMessage : ""}
+        </p>
+
         {error && (
-          <p role="alert" className="mt-2 text-sm text-ink-muted">
+          <p key={errorKey} id={errorId} role="alert" className="mt-2 flex items-center gap-2 text-sm text-ink">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="shrink-0">
+              <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M8 4.5v4.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              <circle cx="8" cy="11.25" r="0.9" fill="currentColor" />
+            </svg>
             {content.errors[error]}
           </p>
         )}

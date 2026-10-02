@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import type { ReactNode, Ref } from "react";
+import ExternalLink from "@/components/ui/ExternalLink";
 import { Link } from "@/i18n/navigation";
 import { isAppHref } from "@/lib/site";
 import { cn, isExternalHref } from "@/lib/utils";
@@ -26,15 +27,34 @@ interface Props {
   size?: Size;
   className?: string;
   onClick?: () => void;
+  /** Aviso de nova aba (`navigation.externalLinkHint`) quando `href` é externo. */
+  externalHint?: string;
+  /** Só no modo <button> (sem `href`): permite devolver o foco a ele. */
+  ref?: Ref<HTMLButtonElement>;
+  /**
+   * `false`: `href` interno sai como <a> comum, sem o Link do next-intl (que lê o
+   * locale da requisição). Só para fora da árvore de idioma, como a 404 global.
+   */
+  localized?: false;
 }
 
-export default function Button({ children, href, variant = "primary", size = "md", className, onClick }: Props) {
+export default function Button({
+  children,
+  href,
+  variant = "primary",
+  size = "md",
+  className,
+  onClick,
+  externalHint = "",
+  ref,
+  localized,
+}: Props) {
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
     // O app vem antes do teste de externo: mesmo com URL absoluta, abre na mesma aba
     // e sai sem o prefixo de idioma que o Link acrescentaria.
-    if (isAppHref(href)) {
+    if (isAppHref(href) || (localized === false && !isExternalHref(href))) {
       return (
         <a className={classes} href={href} onClick={onClick}>
           {children}
@@ -43,9 +63,9 @@ export default function Button({ children, href, variant = "primary", size = "md
     }
 
     return isExternalHref(href) ? (
-      <a className={classes} href={href} rel="noopener noreferrer" target="_blank" onClick={onClick}>
+      <ExternalLink className={classes} href={href} hint={externalHint} onClick={onClick}>
         {children}
-      </a>
+      </ExternalLink>
     ) : (
       <Link className={classes} href={href} onClick={onClick}>
         {children}
@@ -54,7 +74,7 @@ export default function Button({ children, href, variant = "primary", size = "md
   }
 
   return (
-    <button type="button" className={classes} onClick={onClick}>
+    <button ref={ref} type="button" className={classes} onClick={onClick}>
       {children}
     </button>
   );

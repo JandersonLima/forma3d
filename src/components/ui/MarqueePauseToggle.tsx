@@ -24,13 +24,15 @@ export default function MarqueePauseToggle({
 
   return (
     <div data-marquee-paused={paused} className={cn("flex flex-col gap-6", className)}>
-      <Container className="flex justify-end">
+      {/* -mt-4: discreto, colado ao que vem antes. Borda transparente em repouso
+          (sem salto de layout); min-h-6 garante o alvo de 24px */}
+      <Container className="-mt-4 flex justify-end">
         <button
           type="button"
           onClick={() => setPaused((value) => !value)}
-          className="marquee-pause-toggle inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-line px-4 py-2 text-[length:var(--text-sm)] text-ink transition-colors duration-150 hover:bg-surface-2"
+          className="marquee-pause-toggle inline-flex min-h-6 items-center gap-1.5 rounded-[var(--radius-pill)] border border-transparent px-2.5 py-1 text-[length:var(--text-xs)] text-ink-muted transition-colors duration-150 hover:border-line hover:bg-surface-2 focus-visible:border-line focus-visible:bg-surface-2"
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             {paused ? (
               <path d="M5 3.5v9l7-4.5-7-4.5Z" fill="currentColor" />
             ) : (

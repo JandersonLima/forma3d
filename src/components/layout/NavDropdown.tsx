@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import type { Href, NavLink as NavLinkType } from "@/content/types";
 
@@ -15,6 +15,7 @@ export default function NavDropdown({ label, href, overviewLabel, items }: Props
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelId = useId();
 
   useEffect(() => {
     if (!open) return;
@@ -46,12 +47,16 @@ export default function NavDropdown({ label, href, overviewLabel, items }: Props
       className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
+      onBlur={(event) => {
+        // Tab para fora do gatilho e do painel fecha o disclosure.
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+      }}
     >
       <button
         ref={triggerRef}
         type="button"
-        aria-haspopup="true"
         aria-expanded={open}
+        aria-controls={panelId}
         onClick={(event) => {
           // Teclado (Enter/Espaço) chega com detail 0 e continua fechando o
           // menu; clique de mouse (detail >= 1) só abre — um clique depois
@@ -70,30 +75,29 @@ export default function NavDropdown({ label, href, overviewLabel, items }: Props
         </svg>
       </button>
 
-      {open ? (
-        <div className="absolute left-0 top-full w-64 pt-3">
-          <ul className="flex flex-col gap-1 rounded-[var(--radius-card)] border border-line bg-surface-2 p-3">
-            <li>
+      {/* sempre montado (hidden quando fechado): o aria-controls aponta para um id que existe */}
+      <div id={panelId} hidden={!open} className="absolute left-0 top-full w-64 pt-3">
+        <ul className="flex flex-col gap-1 rounded-[var(--radius-card)] border border-line bg-surface-2 p-3">
+          <li>
+            <Link
+              href={href}
+              className="block rounded-[var(--radius-input)] px-3 py-2 text-[length:var(--text-sm)] font-medium text-accent-strong hover:bg-surface"
+            >
+              {overviewLabel}
+            </Link>
+          </li>
+          {items.map((item) => (
+            <li key={item.href}>
               <Link
-                href={href}
-                className="block rounded-[var(--radius-input)] px-3 py-2 text-[length:var(--text-sm)] font-medium text-accent-strong hover:bg-surface"
+                href={item.href}
+                className="block rounded-[var(--radius-input)] px-3 py-2 text-[length:var(--text-sm)] text-ink hover:bg-surface"
               >
-                {overviewLabel}
+                {item.label}
               </Link>
             </li>
-            {items.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="block rounded-[var(--radius-input)] px-3 py-2 text-[length:var(--text-sm)] text-ink hover:bg-surface"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

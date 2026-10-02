@@ -116,6 +116,12 @@ ink-muted 0,3646 · ink 0,9036.
   server components, ler via `getLocaleContent()`. No Button, que também roda dentro do
   Dropzone (client), receber por prop opcional. Depois de A2, nenhum Button do conteúdo
   atual cai no ramo externo.
+- **Status:** ✅ resolvido em 01/10/2026. Texto único em `navigation.{pt,en}.ts`
+  (`externalLinkHint`). `home.social.externalHint` saiu. Novo `ui/ExternalLink.tsx` é o
+  único lugar que monta `target="_blank"` e sempre acrescenta o `sr-only`. Ele é usado
+  no rodapé (colunas e redes), na AnnouncementBar (prop `externalHint` vinda do layout), na
+  SocialProof, no `Button` (prop opcional `externalHint`) e no `GalleryCard` (prop vinda da
+  `Gallery`). No HTML gerado, os 5 `target="_blank"` de cada idioma trazem o aviso.
 
 ### A7 · Média · Títulos do rodapé em h3: salto h1→h3 na 404 e aninhamento errado na home
 - **Onde:** `src/components/layout/Footer.tsx:16`.
@@ -129,6 +135,8 @@ ink-muted 0,3646 · ink 0,9036.
 - **Correção:** adicionar ao rodapé um `<h2 className="sr-only">` com texto novo em
   `navigation.{pt,en}.ts` (ex.: "Mapa do site" / "Site map") e manter as colunas em h3.
   Isso resolve as duas páginas sem mudar o visual.
+- **Status:** ✅ resolvido em 01/10/2026, como proposto (`navigation.footerTitle`:
+  "Mapa do site" / "Site map").
 
 ### A8 · Média · Dropzone: o `aria-label` apaga a instrução do leitor de tela
 - **Onde:** `src/components/ui/Dropzone.tsx:111` (`aria-label`), `:122-123` (textos visíveis).
@@ -136,6 +144,8 @@ ink-muted 0,3646 · ink 0,9036.
   aceitos, limite de 10 MB, atalho Ctrl+V) nunca é anunciado.
 - **Correção:** remover o `aria-label`, para que o nome venha do `<span>` do rótulo, e
   ligar o hint com `aria-describedby` (id via `useId`).
+- **Status:** ✅ resolvido em 01/10/2026. Sem `aria-label`. A zona usa `aria-labelledby` no
+  `<span>` do rótulo e `aria-describedby` no hint (e no erro, A20).
 
 ### A9 · Média · Dropzone: o foco se perde ao aceitar a imagem e o sucesso não é anunciado
 - **Onde:** `src/components/ui/Dropzone.tsx:91-125`.
@@ -145,6 +155,11 @@ ink-muted 0,3646 · ink 0,9036.
 - **Correção:** espelhar o `focusZoneRef`: ao aceitar, focar o botão "Trocar imagem"
   (ou o CTA) e anunciar o sucesso numa região `role="status"`. O texto novo vai em
   `DropzoneContent`, nos dois idiomas.
+- **Status:** ✅ resolvido em 01/10/2026. `focusReplaceRef` leva o foco a "Trocar imagem"
+  (o `Button` aceita `ref` no modo `<button>`), mas só quando a zona estava focada, para
+  colar ou soltar com o foco em outro lugar não o mover. Uma região `role="status"` fica
+  sempre montada e anuncia `acceptedMessage` ("Imagem pronta. Confira a pré-visualização e
+  gere seu modelo." / "Image ready. Check the preview and generate your model.").
 
 ### A10 · Média · Header sticky pode cobrir o elemento focado (WCAG 2.4.11) e os alvos de âncora
 - **Onde:** `src/app/globals.css:62-64`; altura em `src/components/layout/Header.tsx:17` (`h-16`).
@@ -152,6 +167,7 @@ ink-muted 0,3646 · ink 0,9036.
   alinha o elemento no topo da janela, embaixo dos 64px do header.
 - **Correção:** criar o token `--spacing-header: 4rem`, usá-lo no `h-*` do header e em
   `html { scroll-padding-top: var(--spacing-header); }`.
+- **Status:** ✅ resolvido em 01/10/2026, como proposto (`h-header` no `Header`).
 
 ### A11 · Média · Em reduced-motion, as esteiras viram scrollers que o teclado não alcança
 - **Onde:** `src/app/globals.css:264-268`; `src/components/ui/Marquee.tsx:31-37`.
@@ -177,6 +193,17 @@ ink-muted 0,3646 · ink 0,9036.
 - **Correção:** seguir o padrão do next-intl: `src/app/layout.tsx` repassando `children`
   e `src/app/not-found.tsx` renderizando a 404 em pt-BR (com `<html lang="pt-BR">` e o
   `globals.css`), reutilizando o conteúdo de `notFound.pt.ts` via `getContent`.
+- **Status:** ✅ resolvido em 01/10/2026. `src/app/layout.tsx` repassa `children` e importa
+  `globals.css` e `@/lib/fonts`: importados só no `not-found`, o Next não envia esse CSS.
+  As fontes saíram para `src/lib/fonts.ts`. `src/app/not-found.tsx` renderiza
+  `<html lang="pt-BR">` com o mesmo `sections/NotFoundMain.tsx` da 404 do idioma.
+  **Armadilha:** a 404 raiz entra na árvore de todas as rotas, então não pode tocar no
+  next-intl (provider, `Link`, `getLocale`, `setRequestLocale`). Com o provider, a home
+  deixou de gerar `pt-BR.html`/`en.html`, e o build seguia mostrando ●. Com
+  `setRequestLocale("pt-BR")`, `/en` saiu em português. Por isso o botão usa
+  `Button localized={false}`, um `<a>` comum. Conferido no build: `/_not-found` ○,
+  `/[locale]` ● com os dois HTML gerados e cada um no seu idioma, e um único CSS com
+  `@font-face` nas três páginas.
 
 ### A13 · Baixa · Dropdown: `aria-haspopup` anuncia menu e o painel não fecha quando o foco sai
 - **Onde:** `src/components/layout/NavDropdown.tsx:53`; efeito em `:19-41`.
@@ -184,12 +211,15 @@ ink-muted 0,3646 · ink 0,9036.
   (lista de links, sem setas). Ao sair com Tab, o painel continua aberto.
 - **Correção:** remover `aria-haspopup`, adicionar `aria-controls` e fechar no `onBlur` do
   wrapper quando o `relatedTarget` estiver fora dele.
+- **Status:** ✅ resolvido em 01/10/2026, como proposto. O painel agora fica sempre montado,
+  com `hidden` quando fechado, para o `aria-controls` apontar para um id que existe.
 
 ### A14 · Baixa · `<nav>` principal sem nome
 - **Onde:** `src/components/layout/Header.tsx:22`; `src/components/layout/MobileDrawer.tsx:134`.
 - **Problema:** a página tem mais de uma navegação (principal e "Idioma"), e só a de idioma
   tem `aria-label`.
 - **Correção:** `aria-label` vindo de `navigation.{pt,en}.ts` ("Principal" / "Main").
+- **Status:** ✅ resolvido em 01/10/2026 (`navigation.mainNavLabel`, no header e na gaveta).
 
 ### A15 · Baixa · Heading dentro de `<summary>`
 - **Onde:** `src/components/sections/FaqItem.tsx:11`.
@@ -206,6 +236,9 @@ ink-muted 0,3646 · ink 0,9036.
   pela borda tracejada, e `line-strong` também não chega a 3:1 (2,01:1).
 - **Correção:** criar o token `--color-line-control: #626a7a` (3,66:1 sobre void, 3,38:1
   sobre surface) e usá-lo pelo menos na borda da Dropzone.
+- **Status:** ✅ resolvido em 01/10/2026. Token criado e usado na borda da Dropzone (zona e
+  prévia). Os botões ficam como estão: o texto ou ícone já os identifica. O botão de pausa
+  não tem mais borda em repouso.
 
 ### A17 · Baixa · Links do rodapé com 21px de altura
 - **Onde:** `src/components/layout/Footer.tsx:17`, `:25`, `:30`, `:34`, `:56`.
@@ -213,6 +246,8 @@ ink-muted 0,3646 · ink 0,9036.
   (`gap-2`: 29px entre centros). Os demais alvos foram medidos e passam: nav 37px,
   seletor de idioma 29px, botões de 40 a 48px, FAQ 70px+, gaveta 40px+.
 - **Correção:** `py-0.5` nos links, ou manter o `gap` e registrar a dependência da exceção.
+- **Status:** ✅ resolvido em 01/10/2026. `inline-block py-0.5` (cerca de 25px) em todos os
+  links do rodapé, numa constante `linkClass`.
 
 ### A18 · Baixa · Transições de cor/opacidade não desligadas em reduced-motion
 - **Onde:** `src/components/layout/HeaderScrollShell.tsx:24`; `src/components/ui/Button.tsx:10`;
@@ -236,6 +271,8 @@ ink-muted 0,3646 · ink 0,9036.
   seguem navegáveis pelo cursor virtual em combinações mais antigas.
 - **Correção:** aplicar `inert` em `main` e `footer` enquanto a gaveta estiver aberta, ou
   renderizar a gaveta em portal no `body` e usar `inert` nos irmãos.
+- **Status:** ✅ resolvido em 01/10/2026. `inert` em `main` e `footer` enquanto a gaveta está
+  aberta, removido no cleanup do efeito.
 
 ### A20 · Baixa · Erro da Dropzone sem associação e com a mesma cor do hint
 - **Onde:** `src/components/ui/Dropzone.tsx:140-144`.
@@ -244,6 +281,9 @@ ink-muted 0,3646 · ink 0,9036.
 - **Correção:** incluir o id do erro no `aria-describedby` da zona, diferenciar
   visualmente o erro com um ícone e `text-ink`, e limpar o erro antes de um novo
   `setError` para forçar o reanúncio.
+- **Status:** ✅ resolvido em 01/10/2026. O id do erro entra no `aria-describedby`, com
+  ícone de alerta e `text-ink`. Para o reanúncio, em vez de limpar e regravar o erro, um
+  contador vira `key` do `<p role="alert">`, que é remontado a cada rejeição.
 
 ### A21 · Baixa · Outline de foco da galeria some sob a máscara das bordas
 - **Onde:** `src/app/globals.css:94-100`.
@@ -260,6 +300,9 @@ ink-muted 0,3646 · ink 0,9036.
   a confirmar em view-source de `/en/xyz`).
 - **Correção:** conferir no navegador. Se houver duplicata, compor o texto com
   `seo.titleTemplate` e garantir um único título.
+- **Status:** ✅ resolvido em 01/10/2026. Título único conferido no navegador pelo usuário.
+  `NotFoundMain` compõe o título com `seo.titleTemplate` ("Página não encontrada | Forma3D"),
+  nas duas 404.
 
 ### 1.2 O que foi verificado e está correto
 - `lang` no `<html>` por idioma (`pt-BR` / `en`) e `lang`/`hrefLang` em cada opção do seletor.
@@ -545,10 +588,12 @@ Cada passo termina com `npm run typecheck`, `npm run lint` e `npm run build` pas
 2. **Movimento:** A1 (pausa no hero e nas engines, com textos pt/en novos) + A11 (região
    focável) + A18 + A21. Tudo mexe em `Marquee`/`globals.css`. ✅ 01/10/2026
 3. **Textos de acessibilidade de layout, numa mudança só de conteúdo:** A6 (aviso de nova
-   aba), A7 (h2 do rodapé), A14 (nome da nav).
+   aba), A7 (h2 do rodapé), A14 (nome da nav). ✅ 01/10/2026
 4. **Dropzone:** A8, A9, A20, A16 (token de borda) e, opcionalmente, `--color-ok` (H5).
+   ✅ 01/10/2026 (sem `--color-ok`, que fica para H5)
 5. **Navegação e página:** A10 (`--spacing-header` + `scroll-padding`), A13, A19, A17.
-6. **404:** A12 (not-found global) e A22.
+   ✅ 01/10/2026
+6. **404:** A12 (not-found global) e A22. ✅ 01/10/2026
 7. **Desempenho:** P1, P2.
 8. **Limpeza:** H3 (sandbox), H5, H6, H7, H8, H4 (`eslint .`), H2 (script).
 9. **Imagem OG:** K1, K2.

@@ -7,6 +7,8 @@
   --color-surface-2: #1a1d24;
   --color-line: #272b35;
   --color-line-strong: #3d4350;
+  /* limite de controle que só a borda identifica (Dropzone): ≥ 3:1 sobre void e surface */
+  --color-line-control: #626a7a;
   --color-ink: #f2f4f8;
   --color-ink-muted: #9ba3b4;
   --color-accent: #4d6bff;
@@ -15,6 +17,9 @@
   --color-ok: #3ecf8e;
 
   /* tipografia */
+  /* controles secundários (botão de pausa das esteiras) */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.4;
   --text-sm: 0.875rem;
   --text-sm--line-height: 1.5;
   --text-display: clamp(2.75rem, 6vw, 4.5rem);
@@ -37,6 +42,8 @@
 
   /* ritmo */
   --spacing-section: clamp(80px, 10vw, 140px);
+  /* altura do header sticky; também é o scroll-padding-top do html */
+  --spacing-header: 4rem;
   --container-page: 1200px;
   /* teto do card de carrossel: ~2,5 cards no conteúdo de 1200px */
   --container-card: 27rem;
@@ -61,6 +68,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* âncoras e foco por teclado não param embaixo do header sticky (WCAG 2.4.11) */
+    scroll-padding-top: var(--spacing-header);
   }
 
   body {
