@@ -15,7 +15,8 @@ const cards = (items: Testimonial[]) =>
 
 export default async function SocialProof() {
   const { home } = await getLocaleContent();
-  const { title, reviewLabel, reviewHref, externalHint, pauseLabel, resumeLabel, testimonials } = home.social;
+  const { title, reviewLabel, reviewHref, externalHint, pauseLabel, resumeLabel, marqueeLabel, testimonials } =
+    home.social;
 
   return (
     <Section id={ID} className="flex flex-col gap-10">
@@ -34,7 +35,7 @@ export default async function SocialProof() {
 
       <MarqueePauseToggle pauseLabel={pauseLabel} resumeLabel={resumeLabel}>
         <div className="flex flex-col gap-4">
-          <Marquee speed={40} gap="1rem">
+          <Marquee speed={40} gap="1rem" label={marqueeLabel}>
             {cards(testimonials)}
           </Marquee>
           {/* mesmos depoimentos, só para compor a parede: o leitor de tela lê a 1ª faixa */}

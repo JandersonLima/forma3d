@@ -62,7 +62,7 @@ export default function NavDropdown({ label, href, overviewLabel, items }: Props
             setOpen(true);
           }
         }}
-        className="flex items-center gap-1 px-3 py-2 text-[length:var(--text-sm)] text-ink transition-colors duration-150 hover:text-accent"
+        className="flex items-center gap-1 px-3 py-2 text-[length:var(--text-sm)] text-ink transition-colors duration-150 hover:text-accent-strong"
       >
         {label}
         <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true" className={open ? "rotate-180" : undefined}>
@@ -76,7 +76,7 @@ export default function NavDropdown({ label, href, overviewLabel, items }: Props
             <li>
               <Link
                 href={href}
-                className="block rounded-[var(--radius-input)] px-3 py-2 text-[length:var(--text-sm)] font-medium text-accent hover:bg-surface"
+                className="block rounded-[var(--radius-input)] px-3 py-2 text-[length:var(--text-sm)] font-medium text-accent-strong hover:bg-surface"
               >
                 {overviewLabel}
               </Link>

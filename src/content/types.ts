@@ -151,6 +151,12 @@ export interface HomeContent {
     dropzone: DropzoneContent;
     ctaLabel: string;
     ctaHref: Href;
+    /** Nome de região das esteiras (leitor de tela e foco por teclado em reduced-motion). */
+    showcaseLabel: string;
+    partnersLabel: string;
+    /** Um só botão pausa as duas esteiras do hero e a troca antes/depois. */
+    pauseLabel: string;
+    resumeLabel: string;
   };
   showcase: ShowcaseItem[];
   partners: Logo[];
@@ -173,6 +179,9 @@ export interface HomeContent {
     subtitle: string;
     features: GameFeature[];
     enginesLabel: string;
+    enginesRegionLabel: string;
+    enginesPauseLabel: string;
+    enginesResumeLabel: string;
     engines: Logo[];
     ctaLabel: string;
     ctaHref: Href;
@@ -186,6 +195,7 @@ export interface HomeContent {
     externalHint: string;
     pauseLabel: string;
     resumeLabel: string;
+    marqueeLabel: string;
     testimonials: Testimonial[];
   };
   gallery: { title: string; pauseLabel: string; resumeLabel: string; models: GalleryModel[] };

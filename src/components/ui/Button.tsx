@@ -32,17 +32,18 @@ export default function Button({ children, href, variant = "primary", size = "md
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
-    if (isExternalHref(href)) {
+    // O app vem antes do teste de externo: mesmo com URL absoluta, abre na mesma aba
+    // e sai sem o prefixo de idioma que o Link acrescentaria.
+    if (isAppHref(href)) {
       return (
-        <a className={classes} href={href} rel="noopener noreferrer" target="_blank" onClick={onClick}>
+        <a className={classes} href={href} onClick={onClick}>
           {children}
         </a>
       );
     }
 
-    // O app não tem versão por idioma: sai sem o prefixo que o Link acrescentaria.
-    return isAppHref(href) ? (
-      <a className={classes} href={href} onClick={onClick}>
+    return isExternalHref(href) ? (
+      <a className={classes} href={href} rel="noopener noreferrer" target="_blank" onClick={onClick}>
         {children}
       </a>
     ) : (

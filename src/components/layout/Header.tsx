@@ -33,7 +33,7 @@ export default async function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-3 py-2 text-[length:var(--text-sm)] text-ink transition-colors duration-150 hover:text-accent"
+                className="px-3 py-2 text-[length:var(--text-sm)] text-ink transition-colors duration-150 hover:text-accent-strong"
               >
                 {item.label}
               </Link>

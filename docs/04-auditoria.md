@@ -57,6 +57,10 @@ ink-muted 0,3646 · ink 0,9036.
   `MarqueePauseToggle` (textos novos de pausar/retomar em `home.pt.ts` e `home.en.ts`,
   tipados em `types.ts`) e estender a regra de `globals.css:128-130` para
   `[data-marquee-paused="true"] .showcase-card__after { animation-play-state: paused; }`.
+- **Status:** ✅ resolvido em 01/10/2026. Um único `MarqueePauseToggle` no hero
+  (showcase e parceiros, "Pausar animações" / "Pause animations") e outro nas engines
+  ("Pausar engines" / "Pause engines"). A regra de pausa de `globals.css` também para
+  `.showcase-card__after`.
 
 ### A2 · Alta · CTAs do app e cards da galeria abrem em nova aba, sem aviso, quando `NEXT_PUBLIC_APP_URL` é absoluta
 - **Onde:** `src/components/ui/Button.tsx:35-41`; `src/components/sections/GalleryCard.tsx:24-30`.
@@ -68,6 +72,9 @@ ink-muted 0,3646 · ink 0,9036.
   inconsistente e contrário à regra 11 do CLAUDE.md.
 - **Correção:** testar `isAppHref(href)` primeiro nos dois componentes: o app sai como
   `<a>` comum, na mesma aba. Só depois cai no ramo externo.
+- **Status:** ✅ resolvido em 01/10/2026. `isAppHref` é testado primeiro em `Button` e
+  `GalleryCard`. Conferido no HTML gerado com `NEXT_PUBLIC_APP_URL` absoluta: só os links
+  externos de verdade (redes sociais, avaliações) saem com `target="_blank"`.
 
 ### A3 · Alta · Link "ver tudo" do dropdown com contraste 3,91:1
 - **Onde:** `src/components/layout/NavDropdown.tsx:79`.
@@ -76,6 +83,8 @@ ink-muted 0,3646 · ink 0,9036.
 - **Correção:** `text-accent-strong` (5,11:1 em surface-2 e 5,56:1 em surface). Se
   preferir, crie um token semântico `--color-accent-text: var(--color-accent-strong)`
   para todo texto de acento sobre superfície.
+- **Status:** ✅ resolvido em 01/10/2026. `text-accent-strong` no "ver tudo"
+  (sem o token semântico).
 
 ### A4 · Média · Hover da navegação com contraste 4,25:1 com o header rolado
 - **Onde:** `src/components/layout/Header.tsx:36`; `src/components/layout/NavDropdown.tsx:65`;
@@ -83,12 +92,15 @@ ink-muted 0,3646 · ink 0,9036.
 - **Problema:** `hover:text-accent` passa no topo (sobre void, 4,61:1) e falha depois de
   24px de rolagem (sobre surface, 4,25:1).
 - **Correção:** `hover:text-accent-strong` (6,03:1 e 5,56:1).
+- **Status:** ✅ resolvido em 01/10/2026. `hover:text-accent-strong` em `Header` e
+  `NavDropdown`.
 
 ### A5 · Média · AnnouncementBar com link em 3,91:1 (latente)
 - **Onde:** `src/components/layout/AnnouncementBar.tsx:16` e `:20`, sobre o fundo de `:12`.
 - **Problema:** `text-accent` sobre `bg-surface-2`. Hoje não aparece (`announcement: null`
   nos dois idiomas), mas falha no primeiro anúncio publicado.
 - **Correção:** `text-accent-strong` e `hover:text-ink`.
+- **Status:** ✅ resolvido em 01/10/2026, como proposto, nos dois ramos (`<a>` e `Link`).
 
 ### A6 · Média · Links que abrem nova aba sem aviso para leitor de tela
 - **Onde:** `src/components/layout/Footer.tsx:21-24` (colunas com `external`) e `:52-56`
@@ -151,6 +163,10 @@ ink-muted 0,3646 · ink 0,9036.
   `role="region"`, `aria-label` e `tabIndex={0}`. Passar o rótulo, vindo do conteúdo,
   nas esteiras sem links. Alternativa só para logos: `flex-wrap: wrap` no bloco
   reduced-motion, o que elimina o scroll.
+- **Status:** ✅ resolvido em 01/10/2026. Prop `label` no `Marquee`, passada no showcase,
+  nos parceiros, nas engines e na 1ª faixa de depoimentos. Os rótulos vêm de `home.{pt,en}.ts`
+  (`hero.showcaseLabel`, `hero.partnersLabel`, `games.enginesRegionLabel`,
+  `social.marqueeLabel`). As faixas `aria-hidden`, a galeria e a sandbox ficam sem `label`.
 
 ### A12 · Média · 404 global sem `lang`, sem estilo e em inglês
 - **Onde:** ausência de `src/app/not-found.tsx`; saída em `.next/server/app/_not-found.html`
@@ -211,6 +227,7 @@ ink-muted 0,3646 · ink 0,9036.
   total.
 - **Correção:** uma regra no bloco reduced-motion:
   `*, *::before, *::after { transition-duration: 0s !important; }`.
+- **Status:** ✅ resolvido em 01/10/2026, como proposto.
 
 ### A19 · Baixa · Gaveta mobile não torna o resto da página `inert`
 - **Onde:** `src/components/layout/MobileDrawer.tsx:102-116`.
@@ -233,6 +250,8 @@ ink-muted 0,3646 · ink 0,9036.
 - **Problema:** o `mask-image` apaga 6rem de cada lado. Um card focado na borda fica com
   o outline esmaecido.
 - **Correção:** `.marquee:focus-within { mask-image: none; }`.
+- **Status:** ✅ resolvido em 01/10/2026, como proposto. Também cobre o próprio `.marquee`
+  focado como região (A11).
 
 ### A22 · Baixa · `<title>` da 404 sem o template do site e possivelmente duplicado
 - **Onde:** `src/app/[locale]/not-found.tsx:18`.
@@ -339,6 +358,9 @@ Todos se justificam. O showcase do hero, que a regra 3 do CLAUDE.md lista como c
   Um texto de FAQ com `</script>` fecharia a tag antes da hora. O conteúdo hoje é
   estático e confiável, então não há exposição ativa.
 - **Correção:** `.replace(/</g, "\\u003c")`.
+- **Status:** ✅ resolvido em 01/10/2026. Conferido com uma sonda temporária (`</script>`
+  numa resposta do FAQ, já revertida): o `pt-BR.html` trouxe `\u003c/script>` dentro do
+  JSON-LD e nenhum `</script>` literal antes do fechamento real da tag.
 
 ### H2 · Média · `scripts/placeholders.mjs` quebrado desde a etapa 7.2a
 - **Onde:** `scripts/placeholders.mjs:11` e `:16`; `package.json:11`.
@@ -519,9 +541,9 @@ home nem de `alt` faltando.
 Cada passo termina com `npm run typecheck`, `npm run lint` e `npm run build` passando.
 
 1. **Correções pontuais de alto impacto, sem texto novo:** A2 (ordem `isAppHref`), A3 +
-   A4 + A5 (`accent-strong`), H1 (escape do JSON-LD).
+   A4 + A5 (`accent-strong`), H1 (escape do JSON-LD). ✅ 01/10/2026
 2. **Movimento:** A1 (pausa no hero e nas engines, com textos pt/en novos) + A11 (região
-   focável) + A18 + A21. Tudo mexe em `Marquee`/`globals.css`.
+   focável) + A18 + A21. Tudo mexe em `Marquee`/`globals.css`. ✅ 01/10/2026
 3. **Textos de acessibilidade de layout, numa mudança só de conteúdo:** A6 (aviso de nova
    aba), A7 (h2 do rodapé), A14 (nome da nav).
 4. **Dropzone:** A8, A9, A20, A16 (token de borda) e, opcionalmente, `--color-ok` (H5).

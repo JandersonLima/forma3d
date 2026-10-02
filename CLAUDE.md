@@ -116,3 +116,9 @@ corrompem. Prefira as ferramentas de edição.
 Python não está instalado; edite arquivos com as ferramentas de edição, não com scripts Python.
 
 Nunca encadeie `npm run build` com `| Select-String` ou outro filtro no PowerShell; rode o build puro.
+
+A ferramenta de edição converte sequências como \u003c no caractere correspondente ao
+gravar; para escapes Unicode literais, edite com Node e confira os bytes.
+
+Nunca deixe o shell dentro de .next: no Windows isso trava o build.
+Use caminhos absolutos para inspecionar o build.

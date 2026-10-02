@@ -13,11 +13,11 @@ export default function AnnouncementBar({ announcement }: { announcement: Announ
       <Container className="flex flex-wrap items-center justify-center gap-2 py-2 text-center text-[length:var(--text-sm)]">
         <span className="text-ink-muted">{text}</span>
         {external ? (
-          <a className="font-medium text-accent hover:text-accent-strong" href={href} rel="noopener noreferrer" target="_blank">
+          <a className="font-medium text-accent-strong hover:text-ink" href={href} rel="noopener noreferrer" target="_blank">
             {linkLabel}
           </a>
         ) : (
-          <Link className="font-medium text-accent hover:text-accent-strong" href={href}>
+          <Link className="font-medium text-accent-strong hover:text-ink" href={href}>
             {linkLabel}
           </Link>
         )}

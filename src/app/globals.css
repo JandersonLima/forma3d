@@ -124,8 +124,15 @@
     animation-play-state: paused;
   }
 
-  /* MarqueePauseToggle: pausa todas as esteiras que envolve (WCAG 2.2.2) */
-  [data-marquee-paused="true"] .marquee__track {
+  /* sem a máscara das bordas, o outline do item (ou da região) focado fica inteiro */
+  .marquee:focus-within {
+    mask-image: none;
+  }
+
+  /* MarqueePauseToggle: pausa todas as esteiras que envolve (WCAG 2.2.2)
+     e a troca automática antes/depois do showcase */
+  [data-marquee-paused="true"] .marquee__track,
+  [data-marquee-paused="true"] .showcase-card__after {
     animation-play-state: paused;
   }
 
@@ -291,5 +298,11 @@
   }
   html {
     scroll-behavior: auto;
+  }
+  /* cor e opacidade também mudam na hora */
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
   }
 }

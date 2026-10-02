@@ -21,16 +21,17 @@ export default function GalleryCard({ model }: { model: GalleryModel }) {
     </>
   );
 
-  if (isExternalHref(model.href)) {
+  // O app vem antes do teste de externo: mesma aba, sem prefixo de idioma.
+  if (isAppHref(model.href)) {
     return (
-      <a className={classes} href={model.href} target="_blank" rel="noopener noreferrer">
+      <a className={classes} href={model.href}>
         {content}
       </a>
     );
   }
 
-  return isAppHref(model.href) ? (
-    <a className={classes} href={model.href}>
+  return isExternalHref(model.href) ? (
+    <a className={classes} href={model.href} target="_blank" rel="noopener noreferrer">
       {content}
     </a>
   ) : (

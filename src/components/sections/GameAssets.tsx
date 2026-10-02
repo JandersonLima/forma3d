@@ -2,6 +2,7 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Marquee from "@/components/ui/Marquee";
+import MarqueePauseToggle from "@/components/ui/MarqueePauseToggle";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GameFeatureRow from "@/components/sections/GameFeatureRow";
@@ -12,7 +13,18 @@ const ID = "jogos";
 
 export default async function GameAssets() {
   const { home } = await getLocaleContent();
-  const { title, subtitle, features, enginesLabel, engines, ctaLabel, ctaHref } = home.games;
+  const {
+    title,
+    subtitle,
+    features,
+    enginesLabel,
+    enginesRegionLabel,
+    enginesPauseLabel,
+    enginesResumeLabel,
+    engines,
+    ctaLabel,
+    ctaHref,
+  } = home.games;
 
   return (
     <Section id={ID} className="flex flex-col gap-12">
@@ -32,19 +44,21 @@ export default async function GameAssets() {
         <Container>
           <p className="text-center text-[length:var(--text-sm)] text-ink-muted">{enginesLabel}</p>
         </Container>
-        <Marquee speed={45} gap="3.5rem">
-          {engines.map((logo) => (
-            <Image
-              key={logo.name}
-              src={logo.src}
-              alt={logo.name}
-              width={160}
-              height={48}
-              unoptimized
-              className="h-8 w-auto opacity-70"
-            />
-          ))}
-        </Marquee>
+        <MarqueePauseToggle pauseLabel={enginesPauseLabel} resumeLabel={enginesResumeLabel}>
+          <Marquee speed={45} gap="3.5rem" label={enginesRegionLabel}>
+            {engines.map((logo) => (
+              <Image
+                key={logo.name}
+                src={logo.src}
+                alt={logo.name}
+                width={160}
+                height={48}
+                unoptimized
+                className="h-8 w-auto opacity-70"
+              />
+            ))}
+          </Marquee>
+        </MarqueePauseToggle>
       </div>
     </Section>
   );

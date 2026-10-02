@@ -25,6 +25,10 @@ export const home: HomeContent = {
     },
     ctaLabel: "Generate my first model",
     ctaHref: appUrl,
+    showcaseLabel: "Examples: uploaded image and generated model",
+    partnersLabel: "Partner companies",
+    pauseLabel: "Pause animations",
+    resumeLabel: "Resume animations",
   },
 
   // 6 itens: cada card mostra a entrada e o resultado, trocando no hover.
@@ -108,6 +112,9 @@ export const home: HomeContent = {
       { image: "/images/games/texturing.webp", alt: "3D model with a PBR texture set applied", title: "Full PBR textures", body: "Albedo, normal, metallic and roughness up to 8K — or a clean base color if your style is hand-painted.", href: "/recursos/textura" },
     ],
     enginesLabel: "Works with",
+    enginesRegionLabel: "Supported engines",
+    enginesPauseLabel: "Pause engines",
+    enginesResumeLabel: "Resume engines",
     engines: [
       { name: "Engine 1", src: "/images/logos/engine-1.svg" },
       { name: "Engine 2", src: "/images/logos/engine-2.svg" },
@@ -140,6 +147,7 @@ export const home: HomeContent = {
     externalHint: "(opens in a new tab)",
     pauseLabel: "Pause testimonials",
     resumeLabel: "Resume testimonials",
+    marqueeLabel: "Creator testimonials",
     // Placeholders. Substitua por depoimentos reais com autorização de uso.
     testimonials: [
       { avatar: "/images/avatars/01.webp", name: "First Last", role: "3D artist", quote: "Put a real testimonial here — short, with one concrete detail about the workflow." },
