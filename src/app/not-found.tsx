@@ -16,7 +16,7 @@ export default function GlobalNotFound() {
   const { notFound, navigation, seo } = getContent(locale);
 
   return (
-    <html lang={locale} className={fontVariables}>
+    <html lang={locale} className={fontVariables} data-scroll-behavior="smooth">
       <body>
         <NotFoundMain
           content={notFound}

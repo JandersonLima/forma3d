@@ -725,6 +725,6 @@ LCP (§7).
 |---|---|---|---|
 | K3 | Alta | Conteúdo e imagens placeholder | Fornecer textos, números, depoimentos autorizados, logos, redes e imagens reais; depois rodar o `Select-String` do K3 sem ocorrências |
 | K4 | Alta | Links internos levam à 404 | Decidir cada destino (criar página, apontar ao real ou retirar) e unificar os slugs dos cards com a nav |
-| — | — | Revisão do `npm audit` | 3 itens (`postcss` via `next`, `next-intl` ≤ 4.9.1) só corrigíveis com Next 16 / next-intl 4: decidir upgrade ou aceite do risco |
+| — | — | Revisão do `npm audit` | ✅ 02/10, etapa 9: Next 16.3.8 + next-intl 4.14.9, 0 vulnerabilidades |
 
-Os três estão no checklist "Antes de publicar" do `README.md`.
+K3 e K4 estão no checklist "Antes de publicar" do `README.md`.

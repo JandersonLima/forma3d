@@ -4,12 +4,12 @@ Landing page de um gerador de modelos 3D por IA, em português e inglês. A estr
 os padrões de interação foram levantados a partir de `tripo3d.ai` (ver
 `docs/01-analise-referencia.md`); o conteúdo, a marca e o visual são próprios.
 
-Next.js 15 (App Router), TypeScript, Tailwind CSS v4 e next-intl 3. Sem biblioteca de
+Next.js 16 (App Router, Turbopack), TypeScript, Tailwind CSS v4 e next-intl 4. Sem biblioteca de
 animação: as esteiras e transições são CSS puro.
 
 ## Requisitos
 
-- Node.js 18.18 ou mais novo (desenvolvido no Node 24)
+- Node.js 20.9 ou mais novo, mínimo do Next 16 (desenvolvido no Node 24)
 - npm
 
 ## Como rodar (Windows, PowerShell)
@@ -78,9 +78,11 @@ Ficam em `.env.local` (modelo em `.env.example`).
       com os da navegação.
 - [ ] **Variáveis de ambiente** de produção com os domínios reais
       (`NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_APP_URL`).
-- [ ] **Revisar o `npm audit`.** Em 02/10/2026 ele aponta 3 itens: `postcss` interno do
-      `next` (alta) e `next-intl` ≤ 4.9.1 (moderada, com `next`). A correção só vem com
-      versões maiores (Next 16, next-intl 4), que quebram compatibilidade. Decidir entre
-      fazer o upgrade (e reconferir o build) ou registrar o aceite do risco.
+- [x] **Revisar o `npm audit`.** Resolvido em 02/10/2026 (etapa 9) com Next 16.3.8 e
+      next-intl 4.14.9: `found 0 vulnerabilities`. Rodar de novo antes de publicar.
+      Nota: o next-intl 4.13+ marca `setRequestLocale` como depreciado (só no tipo; segue
+      funcionando) em favor de `next/root-params`. Migrar exige `[locale]` como layout
+      raiz, sem o `app/layout.tsx` repassador, o que muda a 404 global (regra 13 do
+      `CLAUDE.md`); fica para uma etapa própria.
 - [ ] `npm run typecheck`, `npm run lint` e `npm run build` passando sem warning, e
       `.next/server/app/pt-BR.html` e `en.html` gerados, cada um no seu idioma.

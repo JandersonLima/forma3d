@@ -15,7 +15,7 @@ interface Props {
 /**
  * Links para a mesma página em cada idioma; o nome de cada idioma vem escrito nele mesmo.
  * <a> comum com getPathname, e não o Link com `locale`: esse sempre prefixa o idioma
- * padrão ("/pt-BR", que o middleware redireciona), e aqui o href sai limpo ("/").
+ * padrão ("/pt-BR", que o proxy redireciona), e aqui o href sai limpo ("/").
  */
 export default function LocaleSwitcher({ label, names, className }: Props) {
   const current = useLocale();

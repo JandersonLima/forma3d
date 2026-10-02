@@ -1,11 +1,12 @@
-import { FlatCompat } from "@eslint/eslintrc";
+import { defineConfig } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
 
-const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
-
-const eslintConfig = [
-  // O ESLint CLI varre a raiz inteira; o `next lint` só olhava src/.
-  { ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"] },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+// Os configs do Next já ignoram .next/, out/, build/ e next-env.d.ts; o ESLint CLI
+// varre a raiz inteira (o `next lint` só olhava src/).
+export default defineConfig([
+  ...nextVitals,
+  ...nextTs,
   {
     rules: {
       "no-restricted-imports": [
@@ -24,6 +25,4 @@ const eslintConfig = [
       ],
     },
   },
-];
-
-export default eslintConfig;
+]);

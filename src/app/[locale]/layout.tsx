@@ -52,10 +52,11 @@ export default async function LocaleLayout({ children, params }: Props) {
   };
 
   return (
-    <html lang={locale} className={fontVariables}>
+    <html lang={locale} className={fontVariables} data-scroll-behavior="smooth">
       <body>
-        {/* Sem messages: os client components só precisam do locale para o Link. */}
-        <NextIntlClientProvider locale={locale}>
+        {/* Sem messages (o null impede o next-intl 4 de herdá-las do request config):
+            os client components só precisam do locale para o Link. */}
+        <NextIntlClientProvider locale={locale} messages={null}>
           <a
             href="#conteudo"
             className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-[var(--radius-input)] focus:bg-surface focus:px-4 focus:py-2 focus:text-ink"

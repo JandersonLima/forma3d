@@ -11,12 +11,14 @@ próprios. Ver `docs/01-analise-referencia.md`.
 
 ## Stack
 
-- Next.js 15 (App Router, Server Components por padrão)
+- Next.js 16 (App Router, Server Components por padrão, Turbopack no dev e no build)
 - TypeScript strict
 - Tailwind CSS v4 (tokens em `@theme` dentro de `src/app/globals.css`)
 - `next/image` para toda imagem — nunca `<img>`
-- `next-intl` 3.x para pt-BR / en: pt-BR sem prefixo (`/`), en em `/en`; o
+- `next-intl` 4.x para pt-BR / en: pt-BR sem prefixo (`/`), en em `/en`; o
   idioma só muda pela URL (sem detecção, sem cookie). Config em `src/i18n/`.
+  Sem messages: o `NextIntlClientProvider` leva `messages={null}`, senão o v4
+  tenta herdá-las do request config e o pré-render quebra.
 - Sem biblioteca de animação: marquees e transições são CSS puro
 
 ## Regras não negociáveis
@@ -88,7 +90,7 @@ src/
   assets/fonts/ TTF estáticos + licenças OFL usados só pela imagem OG
   i18n/         routing, navigation (Link, usePathname, getPathname), request,
                 alternates (hreflang)
-  middleware.ts next-intl
+  proxy.ts      next-intl (o antigo middleware.ts; nome do Next 16)
   components/
     layout/     AnnouncementBar, Header, HeaderScrollShell, NavDropdown,
                 MobileDrawer, LocaleSwitcher, Footer
@@ -115,7 +117,7 @@ public/images/  placeholders (substituir antes de publicar)
 ```bash
 npm run dev        # localhost:3000 (só o usuário roda)
 npm run build      # obrigatório rodar antes de commitar
-npm run lint       # ESLint CLI (eslint .), flat config em eslint.config.mjs
+npm run lint       # ESLint CLI (eslint .), flat config nativo do eslint-config-next em eslint.config.mjs
 npm run typecheck  # tsc --noEmit
 ```
 

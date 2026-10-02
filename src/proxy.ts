@@ -1,6 +1,7 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 
+// Proxy do Next 16 (o antigo middleware.ts): o next-intl resolve o idioma pela URL.
 export default createMiddleware(routing);
 
 export const config = {

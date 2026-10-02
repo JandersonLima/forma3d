@@ -9,7 +9,7 @@ import { theme } from "@/lib/theme";
 /**
  * Imagem de compartilhamento de cada idioma (/og/pt-BR, /og/en), gerada no build.
  * Route Handler em vez da convenção opengraph-image: assim o `alt` sai no idioma
- * certo pelo generateMetadata da página. Fora de [locale] e excluída do middleware.
+ * certo pelo generateMetadata da página. Fora de [locale] e excluída do proxy.
  */
 export const dynamic = "force-static";
 export const dynamicParams = false;
