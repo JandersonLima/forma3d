@@ -17,7 +17,7 @@ const variants: Record<Variant, string> = {
 
 const sizes: Record<Size, string> = {
   md: "h-10 px-5 text-sm",
-  lg: "h-12 px-7 text-base",
+  lg: "h-12 px-7 text-[length:var(--text-body)]",
 };
 
 interface Props {

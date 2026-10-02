@@ -8,6 +8,7 @@ const SIZES = "(min-width: 900px) 256px, 224px";
  * Card antes/depois do hero. A troca é CSS puro (globals.css, .showcase-card):
  * hover em mouse, alternância automática em touch, só o resultado em reduced-motion.
  * O alt fica na imagem de resultado e já descreve o par; a de entrada é decorativa.
+ * `priority` só na entrada: o resultado começa invisível e não deve disputar o preload.
  */
 export default function ShowcaseCard({
   item,
@@ -29,7 +30,6 @@ export default function ShowcaseCard({
         alt={item.alt}
         fill
         sizes={SIZES}
-        priority={priority}
         className="showcase-card__after object-cover"
       />
       <figcaption className="absolute inset-x-3 bottom-3 rounded-[var(--radius-pill)] bg-void/70 px-3 py-1 text-center text-sm text-ink">

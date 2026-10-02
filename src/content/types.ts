@@ -136,22 +136,6 @@ export interface NavigationContent {
   mainNavLabel: string;
 }
 
-export interface SandboxContent {
-  buttonLabels: { primary: string; ghost: string };
-  headings: {
-    center: { eyebrow: string; title: string; description: string };
-    left: { eyebrow: string; title: string; description: string };
-  };
-  marqueeTest: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    few: string[];
-    many: string[];
-    cards: string[];
-  };
-}
-
 export interface HomeContent {
   hero: {
     title: string;
@@ -224,7 +208,6 @@ export interface SeoContent {
   /** Locale do OpenGraph (formato `ll_CC`). */
   ogLocale: string;
   home: PageSeo;
-  sandbox: Pick<PageSeo, "title">;
   /** Campos do JSON-LD SoftwareApplication da home. */
   app: { category: string; operatingSystem: string };
 }
@@ -245,6 +228,5 @@ export interface SiteContent {
   navigation: NavigationContent;
   footer: FooterContent;
   seo: SeoContent;
-  sandbox: SandboxContent;
   notFound: NotFoundContent;
 }

@@ -27,15 +27,15 @@ export default async function Gallery() {
       <MarqueePauseToggle pauseLabel={pauseLabel} resumeLabel={resumeLabel}>
         {/* py-1: o .marquee corta o overflow, e o outline de foco precisa de folga vertical */}
         <div className="flex flex-col gap-4">
-          <Marquee speed={60} gap="1rem" className="py-1">
+          <Marquee speed={60} gap="sm" className="py-1">
             {cards(models, hint)}
           </Marquee>
           {/* mesmos modelos rotacionados, só para compor a parede: Tab e leitor de tela ficam na 1ª faixa */}
           <div aria-hidden="true" inert className="marquee-decorative flex flex-col gap-4">
-            <Marquee direction="right" speed={44} gap="1rem" className="py-1">
+            <Marquee direction="right" speed={44} gap="sm" className="py-1">
               {cards(rotate(models, 4), hint)}
             </Marquee>
-            <Marquee speed={66} gap="1rem" className="py-1">
+            <Marquee speed={66} gap="sm" className="py-1">
               {cards(rotate(models, 8), hint)}
             </Marquee>
           </div>

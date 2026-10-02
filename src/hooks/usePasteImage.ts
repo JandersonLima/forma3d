@@ -1,15 +1,11 @@
-"use client";
-
 import { useEffect } from "react";
 
 /**
  * Captura Ctrl+V / Cmd+V no documento e entrega o primeiro arquivo de imagem colado.
  * É a terceira forma de entrada da dropzone e a mais usada na prática.
  */
-export function usePasteImage(onImage: (file: File) => void, enabled = true) {
+export function usePasteImage(onImage: (file: File) => void) {
   useEffect(() => {
-    if (!enabled) return;
-
     function handlePaste(event: ClipboardEvent) {
       const items = event.clipboardData?.items;
       if (!items) return;
@@ -27,5 +23,5 @@ export function usePasteImage(onImage: (file: File) => void, enabled = true) {
 
     document.addEventListener("paste", handlePaste);
     return () => document.removeEventListener("paste", handlePaste);
-  }, [onImage, enabled]);
+  }, [onImage]);
 }

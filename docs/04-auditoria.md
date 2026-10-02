@@ -367,12 +367,15 @@ Nenhuma fonte de CLS encontrada:
   desktop, as de resultado ficam com `opacity: 0` até o hover e competem com as visíveis.
 - **Correção:** `priority` só no `imageBefore`. O resultado dos primeiros cards fica com o
   lazy padrão.
+- **Status:** ✅ resolvido em 02/10/2026. `pt-BR.html` e `en.html` saem com 2 preloads de
+  imagem (char-in, print-in), não 4.
 
 ### P2 · Baixa · `sizes` da galeria superestima no mobile
 - **Onde:** `src/components/sections/GalleryCard.tsx:17`.
 - **Problema:** abaixo de 560px o card é limitado a `40vw` (150px em 375px), mas `sizes`
   pede 14rem (224px).
 - **Correção:** `sizes="(min-width: 560px) 14rem, 40vw"`.
+- **Status:** ✅ resolvido em 02/10/2026. Conferido no `pt-BR.html`.
 
 ### 2.3 Client components e motivo de cada um
 
@@ -414,6 +417,9 @@ Todos se justificam. O showcase do hero, que a regra 3 do CLAUDE.md lista como c
   `node --import ./scripts/alias-loader.mjs` (hook de resolve `@/x` → `src/x.ts`; o
   Node 24 já remove os tipos) e declarar `sharp` em `devDependencies`. Se as imagens
   reais vierem logo, a alternativa é apagar o script e a entrada no `package.json`.
+- **Status:** ✅ resolvido em 02/10/2026 pela alternativa: `scripts/placeholders.mjs` (e a
+  pasta `scripts/`, que ficou vazia) e a entrada `placeholders` do `package.json` foram
+  apagados. As imagens de `public/images/` continuam (K3).
 
 ### H3 · Média · Sandbox e tudo que só existe por causa dela
 - **Onde:**
@@ -429,6 +435,9 @@ Todos se justificam. O showcase do hero, que a regra 3 do CLAUDE.md lista como c
   - `CLAUDE.md` (estrutura: `sandbox`, `{…,sandbox,…}.{pt,en}.ts`).
 - **Correção:** apagar os arquivos e as referências acima numa única mudança, depois
   rodar `typecheck` e `build`. `docs/03` (etapa 3) fica como histórico.
+- **Status:** ✅ resolvido em 02/10/2026, numa mudança só. A rota `/[locale]/sandbox` saiu
+  do build e o `robots.txt` ficou só com `Allow: /`. Button, SectionHeading e Marquee
+  continuam em uso pela home; nada neles existia só por causa da sandbox.
 
 ### H4 · Média · `next lint` obsoleto
 - **Onde:** `package.json:9`; `eslint.config.mjs:1`.
@@ -436,6 +445,12 @@ Todos se justificam. O showcase do hero, que a regra 3 do CLAUDE.md lista como c
   16. O config usa `@eslint/eslintrc`, que não está declarado; só vem transitivo.
 - **Correção:** `"lint": "eslint ."` e `@eslint/eslintrc` em `devDependencies`. O flat
   config atual já serve.
+- **Status:** ✅ resolvido em 02/10/2026. `@eslint/eslintrc@^3.3.7` declarado. O config
+  precisou de duas mudanças: `ignores` para `.next/`, `out/`, `build/` e `next-env.d.ts`
+  (o CLI varre a raiz inteira) e o array nomeado antes do `export default`
+  (`import/no-anonymous-default-export`, que o `next lint` não via). Conferido com uma
+  sonda temporária (já apagada): `next/link`, `@/content/home.pt` e `@/content/seo.en`
+  deram 3 erros `no-restricted-imports`.
 
 ### H5 · Baixa · Código sem uso
 - `chunkInto`: `src/lib/utils.ts:20-24`, nenhum uso.
@@ -449,10 +464,13 @@ Todos se justificam. O showcase do hero, que a regra 3 do CLAUDE.md lista como c
 - `experimental.optimizePackageImports: ["clsx"]`: `next.config.ts:13` não tem efeito
   (clsx é um arquivo só).
 - **Correção:** remover os itens acima, ou ligar `--color-ok` ao estado de sucesso de A9.
+- **Status:** ✅ resolvido em 02/10/2026. Tudo removido, inclusive `--color-ok`; o `accept`
+  da Dropzone usa `ACCEPTED_IMAGE_TYPES.join(",")`.
 
 ### H6 · Baixa · `.gitkeep` sobrando
 - **Onde:** `src/components/layout/.gitkeep`, `src/components/sections/.gitkeep`.
 - **Correção:** apagar. As pastas já têm arquivos.
+- **Status:** ✅ resolvido em 02/10/2026.
 
 ### H7 · Baixa · Valores soltos
 - Gaps das esteiras como string: `"1.5rem"` e `"3.5rem"` (`Hero.tsx:20`, `:41`;
@@ -464,12 +482,17 @@ Todos se justificam. O showcase do hero, que a regra 3 do CLAUDE.md lista como c
   `Dropzone.tsx:122`; o token equivalente é `--text-body`.
 - **Correção:** tokens `--measure-display`/`--measure-body` e gaps de esteira no `@theme`;
   trocar `text-base` por `text-[length:var(--text-body)]`.
+- **Status:** ✅ resolvido em 02/10/2026. Tokens `--spacing-marquee-sm/md/lg` (1 / 1,5 /
+  3,5rem) e `--measure-display`/`--measure-body` (18ch / 60ch, os valores de hoje; o 65ch
+  do doc 02 fica para H9). A prop `gap` da Marquee virou `"sm" | "md" | "lg"`, com os
+  nomes dos tokens escritos por extenso (o Tailwind só emite os que acha no código).
 
 ### H8 · Baixa · Arquivos de conteúdo importam uns aos outros
 - **Onde:** `src/content/seo.pt.ts:1`, `src/content/seo.en.ts:1` (importam `navigation.*`).
 - **Problema:** é legítimo dentro de `content/`, e o lint só barra de fora. Mas a regra 10
   diz "nenhum arquivo importa `*.pt.ts`/`*.en.ts` direto".
 - **Correção:** ajustar a regra 10 do CLAUDE.md: "nenhum arquivo **fora de `src/content/`**".
+- **Status:** ✅ resolvido em 02/10/2026 (CLAUDE.md e o comentário de `content/index.ts`).
 
 ### H9 · Documentação desatualizada
 
@@ -531,6 +554,10 @@ Todos se justificam. O showcase do hero, que a regra 3 do CLAUDE.md lista como c
   excluir `og` no `matcher` de `src/middleware.ts:9` e declarar
   `openGraph.images`/`twitter.images` com `alt: seo.home.title` no `generateMetadata` de
   `src/app/[locale]/page.tsx`. Confirmar no build que a rota continua ○/●.
+- **Status:** ✅ resolvido em 02/10/2026. `src/app/og/[locale]/route.tsx` sai como ●
+  (`/og/pt-BR`, `/og/en`, PNG gerado no build); caminho e medidas em `ogImagePath`/
+  `ogImageSize` (`src/lib/site.ts`). `en.html`: `og:image:alt="AI 3D model generator"` e
+  `og:image` → `/og/en`; `pt-BR.html` com o alt em pt e `/og/pt-BR`.
 
 ### K2 · Baixa · Fonte da imagem OG diferente da do site
 - **Onde:** `src/app/[locale]/opengraph-image.tsx:27-55`.
@@ -539,6 +566,9 @@ Todos se justificam. O showcase do hero, que a regra 3 do CLAUDE.md lista como c
 - **Correção:** versionar os TTF estáticos (OFL) de Space Grotesk 600/700 e Inter 400 em
   `src/assets/fonts/`, ler com `readFile` e passar em `fonts`. Na mesma mudança, espelhar
   `theme.ts` se novas cores entrarem.
+- **Status:** ✅ resolvido em 02/10/2026. TTF estáticos do Google Fonts com os `OFL-*.txt`
+  em `src/assets/fonts/`: marca em Space Grotesk 700, título em 600 (como o h1 do site),
+  descrição em Inter 400. Sem cor nova; `theme.ts` não mudou.
 
 ### K3 · Alta (bloqueia publicação) · Conteúdo e imagens placeholder
 - Números da prova social "X mil / Y milhões": `home.pt.ts:137`, `home.en.ts:137`.
@@ -594,8 +624,23 @@ Cada passo termina com `npm run typecheck`, `npm run lint` e `npm run build` pas
 5. **Navegação e página:** A10 (`--spacing-header` + `scroll-padding`), A13, A19, A17.
    ✅ 01/10/2026
 6. **404:** A12 (not-found global) e A22. ✅ 01/10/2026
-7. **Desempenho:** P1, P2.
-8. **Limpeza:** H3 (sandbox), H5, H6, H7, H8, H4 (`eslint .`), H2 (script).
-9. **Imagem OG:** K1, K2.
+7. **Desempenho:** P1, P2. ✅ 02/10/2026
+8. **Limpeza:** H3 (sandbox), H5, H6, H7, H8, H4 (`eslint .`), H2 (script). ✅ 02/10/2026
+9. **Imagem OG:** K1, K2. ✅ 02/10/2026
 10. **Documentação:** H9, por último, para refletir o código final.
 11. **Antes de publicar:** K3 e K4.
+
+## 7. Fora da auditoria (sessão de 02/10/2026)
+
+- **404 global com dois `<meta name="robots">`:** ✅ resolvido em 02/10/2026. O Next já
+  põe `noindex` em toda resposta 404 (`NonIndex` em `app-render`); a cópia em
+  `NotFoundMain` saiu. `_not-found.html` com uma só meta; nada do next-intl tocado (regra 13).
+- **LCP amarelo e a entrada do h1:** investigado, sem mudança no código. O h1 começa em
+  `opacity: 0`, e o Chrome só o registra como LCP no primeiro quadro com opacidade > 0.
+  Falta a medição manual (depois de P1) para saber se o h1 é o elemento de LCP e quanto
+  pesa o render delay. Correção proposta, se for: animar só o `transform` do h1
+  (`hero-enter--rise`), mantendo o fade no subtítulo e na Dropzone.
+  - **Medição em 02/10/2026** (Chrome, painel Performance, desktop, depois de P1): LCP
+    0,24 s, CLS 0, INP 8 ms. O elemento de LCP é `img.object-cover` (imagem do
+    showcase), não o h1. ✅ Encerrado: a animação de entrada do h1 fica como está, e a
+    correção proposta acima não será aplicada.

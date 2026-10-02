@@ -42,7 +42,8 @@ próprios. Ver `docs/01-analise-referencia.md`.
    para `sectionTitleId(id)` (`${id}-title`, em `src/lib/utils.ts`), que deve
    ir no título da seção (h1 do Hero, `SectionHeading id` nas demais).
 10. **Conteúdo só pelo ponto único `@/content`** (`src/content/index.ts`).
-    Nenhum arquivo importa `*.pt.ts`/`*.en.ts` direto (o lint barra).
+    Nenhum arquivo fora de `src/content/` importa `*.pt.ts`/`*.en.ts` direto (o
+    lint barra).
     - Server component: `const { home } = await getLocaleContent()`.
     - Layout, páginas, `generateMetadata` e imagem OG (têm o locale nos params):
       `getContent(locale)`.
@@ -70,8 +71,10 @@ próprios. Ver `docs/01-analise-referencia.md`.
 ```
 src/
   app/          globals.css, icon.svg, sitemap, robots
-    [locale]/   layout (root, <html lang>), page, not-found, opengraph-image,
-                sandbox, [...rest] (404 localizada)
+    og/[locale] route handler estático da imagem de compartilhamento (fontes em
+                src/assets/fonts)
+    [locale]/   layout (root, <html lang>), page, not-found,
+                [...rest] (404 localizada)
   i18n/         routing, navigation (Link, usePathname), request, alternates (hreflang)
   middleware.ts next-intl
   components/
@@ -79,7 +82,7 @@ src/
     sections/   uma seção da home por arquivo, na ordem da página
     ui/         Button, Marquee, Container, Section, SectionHeading, Accordion, Dropzone
   content/      index.ts (getContent, getLocaleContent), types.ts e
-                {home,navigation,footer,seo,sandbox,notFound}.{pt,en}.ts
+                {home,navigation,footer,seo,notFound}.{pt,en}.ts
   lib/          utils.ts
   hooks/        usePasteImage.ts
 ```

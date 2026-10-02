@@ -15,6 +15,5 @@ export const seo: SeoContent = {
     description:
       "Turn photos, sketches or text descriptions into textured 3D models, ready for games, 3D printing and animation. Nothing to install.",
   },
-  sandbox: { title: "Design system sandbox" },
   app: { category: "DesignApplication", operatingSystem: "Web" },
 };

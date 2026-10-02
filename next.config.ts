@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
     // Adicione aqui o domínio do seu CDN de imagens quando sair dos assets locais.
     remotePatterns: [],
   },
-  experimental: { optimizePackageImports: ["clsx"] },
 };
 
 export default withNextIntl(nextConfig);

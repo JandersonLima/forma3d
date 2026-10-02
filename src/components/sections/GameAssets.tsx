@@ -45,7 +45,7 @@ export default async function GameAssets() {
           <p className="text-center text-[length:var(--text-sm)] text-ink-muted">{enginesLabel}</p>
         </Container>
         <MarqueePauseToggle pauseLabel={enginesPauseLabel} resumeLabel={enginesResumeLabel}>
-          <Marquee speed={45} gap="3.5rem" label={enginesRegionLabel}>
+          <Marquee speed={45} gap="lg" label={enginesRegionLabel}>
             {engines.map((logo) => (
               <Image
                 key={logo.name}

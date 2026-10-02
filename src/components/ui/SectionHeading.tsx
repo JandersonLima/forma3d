@@ -25,7 +25,7 @@ export default function SectionHeading({
       ) : null}
       <h2 id={id} className="text-[length:var(--text-h2)]">{title}</h2>
       {description ? (
-        <p className="max-w-[60ch] text-[length:var(--text-body-lg)] text-ink-muted">
+        <p className="max-w-[var(--measure-body)] text-[length:var(--text-body-lg)] text-ink-muted">
           {description}
         </p>
       ) : null}

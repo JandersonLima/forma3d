@@ -15,6 +15,5 @@ export const seo: SeoContent = {
     description:
       "Transforme fotos, esboços ou descrições em modelos 3D texturizados e prontos para jogos, impressão 3D e animação. Sem instalar nada.",
   },
-  sandbox: { title: "Sandbox do design system" },
   app: { category: "DesignApplication", operatingSystem: "Web" },
 };

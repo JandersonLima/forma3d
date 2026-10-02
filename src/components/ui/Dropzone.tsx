@@ -4,7 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState, type DragEvent } from 
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { usePasteImage } from "@/hooks/usePasteImage";
-import { cn, validateImageFile } from "@/lib/utils";
+import { ACCEPTED_IMAGE_TYPES, cn, validateImageFile } from "@/lib/utils";
 import type { DropzoneContent, Href, ImageFileError } from "@/content/types";
 
 /**
@@ -15,11 +15,9 @@ import type { DropzoneContent, Href, ImageFileError } from "@/content/types";
 export default function Dropzone({
   content,
   cta,
-  onFileAccepted,
 }: {
   content: DropzoneContent;
   cta: { label: string; href: Href };
-  onFileAccepted?: (file: File) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const zoneRef = useRef<HTMLDivElement>(null);
@@ -35,23 +33,19 @@ export default function Dropzone({
   const hintId = useId();
   const errorId = useId();
 
-  const accept = useCallback(
-    (file: File) => {
-      const problem = validateImageFile(file);
-      if (problem) {
-        setError(problem);
-        setErrorKey((key) => key + 1);
-        return;
-      }
-      // A zona focada vai desmontar: o foco segue para "Trocar imagem". Colar ou
-      // soltar com o foco em outro lugar não o tira de onde está.
-      focusReplaceRef.current = document.activeElement === zoneRef.current;
-      setError(null);
-      setPreview(URL.createObjectURL(file));
-      onFileAccepted?.(file);
-    },
-    [onFileAccepted],
-  );
+  const accept = useCallback((file: File) => {
+    const problem = validateImageFile(file);
+    if (problem) {
+      setError(problem);
+      setErrorKey((key) => key + 1);
+      return;
+    }
+    // A zona focada vai desmontar: o foco segue para "Trocar imagem". Colar ou
+    // soltar com o foco em outro lugar não o tira de onde está.
+    focusReplaceRef.current = document.activeElement === zoneRef.current;
+    setError(null);
+    setPreview(URL.createObjectURL(file));
+  }, []);
 
   const clear = () => {
     setPreview(null);
@@ -136,7 +130,7 @@ export default function Dropzone({
             {...dropHandlers}
             className={cn(frame, "cursor-pointer border-dashed px-6 py-10 hover:border-accent")}
           >
-            <span id={labelId} className="text-base font-medium">
+            <span id={labelId} className="text-[length:var(--text-body)] font-medium">
               {content.label}
             </span>
             <span id={hintId} className="text-sm text-ink-muted">
@@ -148,7 +142,7 @@ export default function Dropzone({
         <input
           ref={inputRef}
           type="file"
-          accept="image/png,image/jpeg,image/webp"
+          accept={ACCEPTED_IMAGE_TYPES.join(",")}
           className="sr-only"
           tabIndex={-1}
           aria-hidden="true"

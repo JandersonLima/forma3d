@@ -14,7 +14,6 @@
   --color-accent: #4d6bff;
   --color-accent-strong: #6a84ff;
   --color-accent-soft: #1c2340;
-  --color-ok: #3ecf8e;
 
   /* tipografia */
   /* controles secundários (botão de pausa das esteiras) */
@@ -34,6 +33,9 @@
   --text-body-lg--line-height: 1.6;
   --text-body: 1rem;
   --text-body--line-height: 1.65;
+  /* medida de linha: títulos de destaque (h1) e parágrafos de corpo */
+  --measure-display: 18ch;
+  --measure-body: 60ch;
 
   /* forma */
   --radius-card: 16px;
@@ -44,6 +46,10 @@
   --spacing-section: clamp(80px, 10vw, 140px);
   /* altura do header sticky; também é o scroll-padding-top do html */
   --spacing-header: 4rem;
+  /* espaço entre itens das esteiras (Marquee, prop gap) */
+  --spacing-marquee-sm: 1rem;
+  --spacing-marquee-md: 1.5rem;
+  --spacing-marquee-lg: 3.5rem;
   --container-page: 1200px;
   /* teto do card de carrossel: ~2,5 cards no conteúdo de 1200px */
   --container-card: 27rem;
@@ -115,8 +121,8 @@
     align-items: center;
     justify-content: space-around;
     min-width: 100%;
-    gap: var(--marquee-gap, 2rem);
-    padding-right: var(--marquee-gap, 2rem);
+    gap: var(--marquee-gap, var(--spacing-marquee-md));
+    padding-right: var(--marquee-gap, var(--spacing-marquee-md));
     animation: marquee-scroll var(--marquee-speed, 50s) linear infinite;
   }
 

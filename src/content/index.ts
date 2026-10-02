@@ -8,14 +8,12 @@ import { navigation as navigationEn } from "./navigation.en";
 import { navigation as navigationPt } from "./navigation.pt";
 import { notFound as notFoundEn } from "./notFound.en";
 import { notFound as notFoundPt } from "./notFound.pt";
-import { sandbox as sandboxEn } from "./sandbox.en";
-import { sandbox as sandboxPt } from "./sandbox.pt";
 import { seo as seoEn } from "./seo.en";
 import { seo as seoPt } from "./seo.pt";
 import type { Locale, SiteContent } from "./types";
 
 /**
- * Ponto único de acesso ao conteúdo. Nenhum outro arquivo importa `*.pt.ts`/`*.en.ts`.
+ * Ponto único de acesso ao conteúdo. Nenhum arquivo fora de `src/content/` importa `*.pt.ts`/`*.en.ts`.
  */
 const content: Record<Locale, SiteContent> = {
   "pt-BR": {
@@ -23,7 +21,6 @@ const content: Record<Locale, SiteContent> = {
     navigation: navigationPt,
     footer: footerPt,
     seo: seoPt,
-    sandbox: sandboxPt,
     notFound: notFoundPt,
   },
   en: {
@@ -31,7 +28,6 @@ const content: Record<Locale, SiteContent> = {
     navigation: navigationEn,
     footer: footerEn,
     seo: seoEn,
-    sandbox: sandboxEn,
     notFound: notFoundEn,
   },
 };

@@ -15,7 +15,7 @@ import { getContent } from "@/content";
 import type { Locale } from "@/content/types";
 import { localeAlternates } from "@/i18n/alternates";
 import { getPathname } from "@/i18n/navigation";
-import { absoluteUrl } from "@/lib/site";
+import { absoluteUrl, ogImagePath, ogImageSize } from "@/lib/site";
 
 interface Props {
   params: Promise<{ locale: Locale }>;
@@ -27,6 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { title, description } = seo.home;
   // Canonical do próprio idioma (/ ou /en) e hreflang para todos, com x-default no pt-BR.
   const url = getPathname({ href: "/", locale });
+  // Imagem do próprio idioma, com o alt no idioma (o metadataBase do layout a torna absoluta).
+  const images = [{ url: ogImagePath(locale), ...ogImageSize, alt: title, type: "image/png" }];
 
   return {
     // O template do layout só vale para segmentos filhos; a home está no mesmo segmento.
@@ -34,8 +36,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: { canonical: url, languages: localeAlternates("/") },
     // openGraph/twitter do filho substituem os do layout por inteiro — repete os campos comuns.
-    openGraph: { type: "website", locale: seo.ogLocale, siteName: seo.siteName, url, title, description },
-    twitter: { card: "summary_large_image", title, description },
+    openGraph: { type: "website", locale: seo.ogLocale, siteName: seo.siteName, url, title, description, images },
+    twitter: { card: "summary_large_image", title, description, images },
   };
 }
 

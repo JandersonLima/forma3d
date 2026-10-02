@@ -33,15 +33,15 @@ export default async function SocialProof() {
 
       <MarqueePauseToggle pauseLabel={pauseLabel} resumeLabel={resumeLabel}>
         <div className="flex flex-col gap-4">
-          <Marquee speed={40} gap="1rem" label={marqueeLabel}>
+          <Marquee speed={40} gap="sm" label={marqueeLabel}>
             {cards(testimonials)}
           </Marquee>
           {/* mesmos depoimentos, só para compor a parede: o leitor de tela lê a 1ª faixa */}
           <div aria-hidden="true" className="marquee-decorative flex flex-col gap-4">
-            <Marquee direction="right" speed={55} gap="1rem">
+            <Marquee direction="right" speed={55} gap="sm">
               {cards(rotate(testimonials, 3))}
             </Marquee>
-            <Marquee speed={48} gap="1rem">
+            <Marquee speed={48} gap="sm">
               {cards(rotate(testimonials, 6))}
             </Marquee>
           </div>

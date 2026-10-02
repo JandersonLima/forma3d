@@ -1,6 +1,13 @@
 import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
+// Nomes por extenso: o Tailwind só emite os tokens do @theme que acha escritos no código.
+const GAPS = {
+  sm: "var(--spacing-marquee-sm)",
+  md: "var(--spacing-marquee-md)",
+  lg: "var(--spacing-marquee-lg)",
+} as const;
+
 /**
  * Esteira infinita. Na home: showcase e parceiros (hero), engines, depoimentos e
  * galeria. CSS puro — as classes vivem em globals.css.
@@ -13,7 +20,7 @@ export default function Marquee({
   children,
   direction = "left",
   speed = 50,
-  gap = "2rem",
+  gap = "md",
   pauseOnHover = true,
   label,
   className,
@@ -21,14 +28,14 @@ export default function Marquee({
   children: ReactNode;
   direction?: "left" | "right";
   speed?: number;
-  gap?: string;
+  gap?: keyof typeof GAPS;
   pauseOnHover?: boolean;
   label?: string;
   className?: string;
 }) {
   const style = {
     "--marquee-speed": `${speed}s`,
-    "--marquee-gap": gap,
+    "--marquee-gap": GAPS[gap],
   } as CSSProperties;
 
   const region = label ? { role: "region", "aria-label": label, tabIndex: 0 } : {};

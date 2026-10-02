@@ -15,7 +15,7 @@ const classes =
 export default function GalleryCard({ model, externalHint }: { model: GalleryModel; externalHint: string }) {
   const content = (
     <>
-      <Image src={model.thumb} alt="" fill sizes="14rem" className="object-cover" />
+      <Image src={model.thumb} alt="" fill sizes="(min-width: 560px) 14rem, 40vw" className="object-cover" />
       <span className="gallery-card__name absolute inset-x-0 bottom-0 bg-void/70 px-4 py-3 text-[length:var(--text-sm)] font-medium text-ink">
         {model.name}
       </span>

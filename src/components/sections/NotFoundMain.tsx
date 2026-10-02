@@ -17,20 +17,20 @@ interface Props {
 
 /**
  * Conteúdo das duas 404: a do idioma (`[locale]/not-found.tsx`) e a global
- * (`app/not-found.tsx`). not-found não aceita generateMetadata, então título e
- * noindex vão aqui e o React os leva para o <head>.
+ * (`app/not-found.tsx`). not-found não aceita generateMetadata, então o título vai
+ * aqui e o React o leva para o <head>. O noindex não: o Next já o põe em toda
+ * resposta 404, e repeti-lo aqui duplicava a meta.
  */
 export default function NotFoundMain({ content, titleTemplate, homeHref, localizedHome }: Props) {
   return (
     <main id="conteudo">
       <title>{titleTemplate.replace("%s", content.title)}</title>
-      <meta name="robots" content="noindex" />
       <Section id={ID}>
         <Container className="flex flex-col items-center gap-8 text-center">
-          <h1 id={sectionTitleId(ID)} className="max-w-[18ch] text-[length:var(--text-display)]">
+          <h1 id={sectionTitleId(ID)} className="max-w-[var(--measure-display)] text-[length:var(--text-display)]">
             {content.title}
           </h1>
-          <p className="max-w-[60ch] text-[length:var(--text-body-lg)] text-ink-muted">{content.body}</p>
+          <p className="max-w-[var(--measure-body)] text-[length:var(--text-body-lg)] text-ink-muted">{content.body}</p>
           <Button href={homeHref} size="lg" localized={localizedHome}>
             {content.homeLabel}
           </Button>

@@ -2,7 +2,9 @@ import { FlatCompat } from "@eslint/eslintrc";
 
 const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
 
-export default [
+const eslintConfig = [
+  // O ESLint CLI varre a raiz inteira; o `next lint` só olhava src/.
+  { ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"] },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
@@ -23,3 +25,5 @@ export default [
     },
   },
 ];
+
+export default eslintConfig;

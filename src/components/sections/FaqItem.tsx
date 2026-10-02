@@ -20,7 +20,7 @@ export default function FaqItem({ item }: { item: FaqItemData }) {
           <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </summary>
-      <p className="max-w-[60ch] pb-6 text-[length:var(--text-body)] text-ink-muted">{item.answer}</p>
+      <p className="max-w-[var(--measure-body)] pb-6 text-[length:var(--text-body)] text-ink-muted">{item.answer}</p>
     </details>
   );
 }

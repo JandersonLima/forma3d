@@ -8,3 +8,7 @@ export const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "/app";
 
 /** Href que aponta para o app: sai como <a> comum, sem o prefixo de idioma do Link. */
 export const isAppHref = (href: string) => href === appUrl || href.startsWith(`${appUrl}/`);
+
+/** Imagem de compartilhamento (src/app/og/[locale]/route.tsx): caminho e medidas. */
+export const ogImagePath = (locale: string) => `/og/${locale}`;
+export const ogImageSize = { width: 1200, height: 630 } as const;
