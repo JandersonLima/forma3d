@@ -41,6 +41,7 @@ Ficam em `.env.local` (modelo em `.env.example`).
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | origem pública do site: canonical, hreflang, sitemap, robots, JSON-LD e imagem de compartilhamento | `https://exemplo.com.br` |
 | `NEXT_PUBLIC_APP_URL` | endereço do app (editor) usado pelos CTAs, pela galeria e pelo rodapé. Nunca recebe prefixo de idioma e abre na mesma aba, mesmo quando é absoluta | `/app` |
+| `SITE_INDEXABLE` | libera buscadores no lançamento. Só o valor `true` libera. É só do servidor (sem `NEXT_PUBLIC`) e lida no build: mudar o valor exige novo deploy | bloqueado: `robots.txt` com `Disallow: /` e `noindex, nofollow` nas páginas de idioma |
 
 ## Comandos
 
@@ -78,6 +79,9 @@ Ficam em `.env.local` (modelo em `.env.example`).
       com os da navegação.
 - [ ] **Variáveis de ambiente** de produção com os domínios reais
       (`NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_APP_URL`).
+- [ ] **Liberar buscadores** no lançamento: `SITE_INDEXABLE=true` nas variáveis de
+      produção da Vercel e novo deploy. Conferir `/robots.txt` com `Allow: /` e a home
+      (`/` e `/en`) sem `noindex`.
 - [x] **Revisar o `npm audit`.** Resolvido em 02/10/2026 (etapa 9) com Next 16.3.8 e
       next-intl 4.14.9: `found 0 vulnerabilities`. Rodar de novo antes de publicar.
       Nota: o next-intl 4.13+ marca `setRequestLocale` como depreciado (só no tipo; segue

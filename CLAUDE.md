@@ -106,7 +106,7 @@ src/
                 {home,navigation,footer,seo,notFound}.{pt,en}.ts
   lib/          utils (cn, sectionTitleId, isExternalHref, rotate, validação de
                 upload), site (siteUrl,
-                appUrl, isAppHref, ogImagePath), theme (cores para onde CSS não
+                appUrl, isAppHref, ogImagePath, siteIndexable/pageRobots), theme (cores para onde CSS não
                 chega), jsonLd (serializeJsonLd), fonts (next/font)
   hooks/        usePasteImage.ts
 public/images/  placeholders (substituir antes de publicar)

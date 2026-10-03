@@ -15,7 +15,7 @@ import { getContent } from "@/content";
 import type { Locale } from "@/content/types";
 import { localeAlternates } from "@/i18n/alternates";
 import { getPathname } from "@/i18n/navigation";
-import { absoluteUrl, ogImagePath, ogImageSize } from "@/lib/site";
+import { absoluteUrl, ogImagePath, ogImageSize, pageRobots } from "@/lib/site";
 
 interface Props {
   params: Promise<{ locale: Locale }>;
@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: { absolute: seo.titleTemplate.replace("%s", title) },
     description,
     alternates: { canonical: url, languages: localeAlternates("/") },
+    robots: pageRobots,
     // openGraph/twitter do filho substituem os do layout por inteiro — repete os campos comuns.
     openGraph: { type: "website", locale: seo.ogLocale, siteName: seo.siteName, url, title, description, images },
     twitter: { card: "summary_large_image", title, description, images },
